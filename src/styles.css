@@ -1,7 +1,14 @@
+body {
+    background-color: darkgray;
+    opacity: 0.9;
+}
+
+
 
 p{
     text-align:center;
     color: lightgrey;
+    background-color:darkgray;
 }
 
 h1{
@@ -13,4 +20,8 @@ h2{
     text-align: center;
 
 }
+
+
+
+
 
