@@ -35,6 +35,28 @@
     font-size: 36px;
     margin-left: 50px;
   }
+
+  .icon-button {
+    /* Style the button */
+    background-color: #4CAF50; /* Green background */
+    color: #ffffff; /* White text */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Add some padding */
+    font-size: 16px; /* Set font size */
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+  
+  .icon-button:hover {
+    /* Style on hover */
+    background-color: #3e8e41; /* Darker green on hover */
+  }
+  
+  .icon-button:active {
+    /* Style on click */
+    background-color: #3e8e41; /* Darker green on click */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a box shadow */
+  }
+
   
   /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
   #main {

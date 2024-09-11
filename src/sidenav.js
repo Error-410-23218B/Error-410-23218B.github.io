@@ -1,3 +1,18 @@
+function createSidenav() {
+    const sidenavHtml = `
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="project1.html">project1</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+      </div>
+    `;
+    document.body.innerHTML += sidenavHtml;
+  }
+  
+  createSidenav();
+
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
