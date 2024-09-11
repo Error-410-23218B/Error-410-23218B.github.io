@@ -1,6 +1,7 @@
 body {
     background-color: darkgray;
     opacity: 0.9;
+    
 }
 
 
@@ -14,12 +15,20 @@ p{
 h1{
     text-align: center;
     color: grey;
+    text-shadow: 2px 2px;
 }
 
 h2{
     text-align: center;
 
 }
+
+#grad{
+    background-image: linear-gradient(to-right,red,yellow);
+    
+
+}
+
 
 
 
