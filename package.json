@@ -1,0 +1,22 @@
+{
+  "name": "error-410-23218b.github.io",
+  "version": "1.0.0",
+  "description": "Rohan Jose's CS Project Portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Error-410-23218B/Error-410-23218B.github.io.git"
+  },
+  "author": "Rohan Jose",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Error-410-23218B/Error-410-23218B.github.io/issues"
+  },
+  "homepage": "https://github.com/Error-410-23218B/Error-410-23218B.github.io#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}
