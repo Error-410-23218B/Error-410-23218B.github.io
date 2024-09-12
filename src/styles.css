@@ -8,23 +8,24 @@ p{
 
 h1{
     text-align: center;
-    color: blue;
-    text-shadow: 2px 2px;
+    color: darkslategray;
+    font-weight: bold;
 }
 
 h2{
     text-align: center;
-
+    color: rgb(75, 70, 70);
+    font-style:initial;
 }
 
 #grad{
-    background-image: linear-gradient(to-right,red,yellow);
-    
-
+    background-image: linear-gradient(to-right,black,darkgray);
 }
 
 
-
+body{
+    background-color: gray;
+}
 
 
 

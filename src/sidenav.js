@@ -2,6 +2,7 @@ function createSidenav() {
     const sidenavHtml = `
       <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Home</a>
         <a href="project1.html">project1</a>
         <a href="#">Services</a>
         <a href="#">Clients</a>
