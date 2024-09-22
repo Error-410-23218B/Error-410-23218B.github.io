@@ -21,7 +21,6 @@
     <!-- Custom styles for this template -->
     <link href="css/cover.css" rel="stylesheet">
     <link href="css/footer.css" rel="stylesheet">
-    <link href="css/header.css" rel="stylesheet">
   </head>
   <body class="d-flex h-100 text-center text-bg-dark">
 
@@ -65,16 +64,28 @@
 
     
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="mb-auto">
-    <div>
-      <h3 class="float-md-start mb-0">Project0:Portfolio</h3>
-      <nav class="nav nav-masthead justify-content-center float-md-end">
-        <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="">Home</a>
-        <a class="nav-link fw-bold py-1 px-0" href="projects.html">Projects</a>
-        <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>
-      </nav>
+<header data-bs-theme="dark">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top ">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="">Portfolio</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="projects.html">Projects</a>
+          </li>
+   
+        </ul>
+
+      </div>
     </div>
-  </header>
+  </nav>
+</header>
 
   <main class="px-3">
     <h1>My Portfolio</h1>
