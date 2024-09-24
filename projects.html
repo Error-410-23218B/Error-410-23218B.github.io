@@ -22,11 +22,10 @@
     <!-- Custom styles for this template -->
     <link href="css/carousel.css" rel="stylesheet">
     <link href="css/footer.css" rel="stylesheet">
-
-
+    <link href="css/header.css" rel="stylesheet">
 
   </head>
-  <body>
+  <body id="searchContainer">
 
 
 
@@ -77,15 +76,15 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="projects.html">Projects</a>
+            <a class="nav-link active" href="projects.html">Projects</a>
           </li>
 
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" role="search" id ="search">
+          <input class="form-control me-2" type="search"  placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
@@ -237,6 +236,7 @@
   </footer>
 </div>
 </main>
+<script src="js/search.js"></script>
 <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/footer.js"></script>
 
