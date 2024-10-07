@@ -159,22 +159,30 @@ body {
   display: block !important;
 }
 
-.carousel-indicators{
-  
+
+.carousel .carousel-indicators .carousel-button:hover {
+  animation: scaleButton 1s linear;
+}
+
+@keyframes scaleButton {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
 }
 
 
-@keyframes scaleButton {
-  0%{
-    transform: scale(0);
-  }
+.carousel .carousel-indicators .carousel-button {
+  animation: fadeIn 1s;
+}
 
-  50%{
-    transform: scale(1.1);
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-
-  100%{
-    transform: scale(0);
+  to {
+    opacity: 1;
   }
-
 }

@@ -27,19 +27,7 @@
     
   </head>
 
-
-
-
-
-
-
 <body>
-
-
-
-
-
-
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
         <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
                 id="bd-theme"
@@ -76,9 +64,7 @@
       </div>
   
 
-
-
-    <header data-bs-theme="dark">
+      <header data-bs-theme="dark">
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
           <div class="container-fluid">
             <a class="navbar-brand" href="">Portfolio</a>
@@ -104,40 +90,7 @@
       </header>
 
 
-<main>
-
-        <h1 class="text-center">Raytracing Project</h1>
-        <img src="raytracing.png" style="max-width: 75%; align-items: center; justify-content: center;"  class="rounded mx-auto d-block">
-        <p>In this post, we'll be exploring a CUDA-accelerated ray tracing renderer written in C++. Ray tracing is a rendering technique used to generate photorealistic images by simulating the way light behaves in the real world. It's a computationally intensive task, making it an ideal candidate for acceleration using NVIDIA's CUDA platform. We'll break down the code, explaining each component and how it contributes to the overall rendering process.</p>
-
-        <p>Includes and Definitions: The code starts with a list of includes for various libraries, including CUDA, OpenMP, and custom headers for vector math and ray tracing data structures.Error Handling: A custom error handling function, checkCudaErrors, is defined to handle CUDA errors.Device Functions: Several device functions are defined, including color, rand_init, render_init, render, create_world, and free_world. These functions will be executed on the GPU.Main Function: The main function is responsible for initializing the renderer, allocating memory, and launching the rendering kernel.</p>
-
-        <p>The color function is responsible for calculating the color of a ray as it interacts with the scene. It takes a ray object, a hitable list, and a curandState object as input. The function recursively calls itself to simulate the way light bounces around the scene, eventually returning the final color of the ray.</p>
-
-        <p>The rand_init function initializes a curandState object, which is used to generate random numbers on the GPU.</p>
-
-        <p>The render function is the core of the renderer. It takes a vec3 array (the framebuffer), image dimensions, number of samples per pixel, camera, world, and random state as input. The function launches a kernel that iterates over each pixel in the image, generating a ray for each pixel and calling the color function to calculate its color.</p>
-
-        <p>The create_world function creates a scene by allocating memory for a list of hitable objects and initializing them with random materials and positions.</p>
-
-        <p>The free_world function frees the memory allocated for the scene.</p>
-        
-
-        <!-- Place this tag where you want the button to render. -->
-        <div class="container mt-5">
-            <a href="https://github.com/Rohan-Jose-08/Raytracing-GPU" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-lg d-flex align-items-center justify-content-center">
-                <i class="bi bi-github me-2"></i>
-                <span class="d-none d-sm-inline">View on GitHub</span>
-                <span class="d-inline d-sm-none">GitHub</span>
-            </a>
-        </div>
-</main>
-    
-
- 
-
-
-    <div class="container">
+      <div class="container">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <div class="col-md-4 d-flex align-items-center">
           <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
@@ -153,7 +106,8 @@
         </ul>
       </footer>
   </div>
-    <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/footer.js"></script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-  </body>
+  
+      <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="js/footer.js"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
