@@ -1,19 +1,14 @@
 .navbar-brand:hover{
 
-    animation: bounce 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition: all 500ms ease-in-out;
+
   }
+
+
   
-  @keyframes bounce {
-    0% {
-      transform: translateY(0) rotate(0deg) ;
-    }
-    50% {
-      transform: translateY(10px) rotate(45deg);
-    }
-    100% {
-      transform: translateY(0) rotate(0deg);
-    }
-  }
+.navbar-brand:hover::before {
+  content: "Rohan Jose's ";
+}
 
   .highlight {
     background-color: yellow;

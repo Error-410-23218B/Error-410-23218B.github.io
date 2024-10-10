@@ -102,7 +102,7 @@
 <main>
 
         <h1 class="text-center">Raytracing Project</h1>
-        <img src="raytracing.png" style="max-width: 75%; align-items: center; justify-content: center;"  class="rounded mx-auto d-block">
+        <img src="raytracing.webp" style="max-width: 75%; align-items: center; justify-content: center;"  class="rounded mx-auto d-block">
         <p>In this post, we'll be exploring a CUDA-accelerated ray tracing renderer written in C++. Ray tracing is a rendering technique used to generate photorealistic images by simulating the way light behaves in the real world. It's a computationally intensive task, making it an ideal candidate for acceleration using NVIDIA's CUDA platform. We'll break down the code, explaining each component and how it contributes to the overall rendering process.</p>
 
         <p>Includes and Definitions: The code starts with a list of includes for various libraries, including CUDA, OpenMP, and custom headers for vector math and ray tracing data structures.Error Handling: A custom error handling function, checkCudaErrors, is defined to handle CUDA errors.Device Functions: Several device functions are defined, including color, rand_init, render_init, render, create_world, and free_world. These functions will be executed on the GPU.Main Function: The main function is responsible for initializing the renderer, allocating memory, and launching the rendering kernel.</p>

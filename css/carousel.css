@@ -191,3 +191,96 @@ body {
     opacity: 1;
   }
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Adjust image size for different viewports */
+@media (max-width: 768px) {
+  .featurette-image {
+    width: 100%;
+    height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+  .featurette-image {
+    width: 100%;
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .featurette-image {
+    width: 100%;
+    height: 150px;
+  }
+}
+
+/* Adjust carousel image size for different viewports */
+.carousel-inner img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .carousel-inner img {
+    height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-inner img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-inner img {
+    height: 150px;
+  }
+}
+
+/* Adjust circular image size for different viewports */
+.rounded-circle {
+  width: 150px;
+  height: 150px;
+}
+
+@media (max-width: 768px) {
+  .rounded-circle {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 576px) {
+  .rounded-circle {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rounded-circle {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.btn {
+  transition: transform 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.15);
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
