@@ -26,7 +26,7 @@
     <link href="css/header.css" rel="stylesheet">
 
   </head>
-  <body id="searchContainer">
+  <body class="fade-in">
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
       <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
               id="bd-theme"
@@ -117,15 +117,15 @@
           </li>
 
         </ul>
-        <div class="d-flex" role="search" >
-          <input class="form-control me-2" type="search" id="search"  placeholder="Search" aria-label="Search">
+        <div class="d-flex search-container" role="search" >
+          <input class="form-control me-2 search-input" type="text" id="searchInput"  placeholder="Search" aria-label="Search">
         </div>
       </div>
     </div>
   </nav>
 </header>
 
-<main>
+<main id="content">
 
   <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -304,6 +304,6 @@
 <script src="js/search.js"></script>
 <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/footer.js"></script>
-
+<script src="js/index.js"></script>
     </body>
 </html>

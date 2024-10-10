@@ -18,3 +18,16 @@
   .highlight {
     background-color: yellow;
   }
+
+  .fade-in {
+    opacity: 0; /* initial opacity */
+    transition: opacity 1s; /* transition duration */
+  }
+  
+  .fade-in.loaded {
+    opacity: 1; /* final opacity */
+  }
+  
+  
+  
+  
