@@ -23,6 +23,6 @@
     opacity: 1; /* final opacity */
   }
   
-  
-  
-  
+.nav-item.active > a{
+ color: white;
+}
