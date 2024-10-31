@@ -35,10 +35,11 @@
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="carousel-button active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" class="carousel-button" aria-label="Slide 2"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" class="carousel-button" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" class="carousel-button" aria-label="Slide 4"></button>
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="raytracing.webp" class="d-block w-100 img-fluid" alt="Raytracing Project">        <div class="container">
+        <img src="raytracing.webp" class="d-block w-100 img-fluid" alt="Raytracing Project"><div class="container">
           <div class="carousel-caption text-start">
             <h1 >Raytracing Project</h1>
             <p class="opacity-75">A CUDA scene raytracer</p>
@@ -50,12 +51,23 @@
         <img src="OSDev.jpg" class="d-block w-100 img-fluid" alt="OS Development Project">
         <div class="container">
           <div class="carousel-caption">
-            <h1>Another example headline.</h1>
-            <p>Some representative placeholder content for the second slide of the carousel.</p>
+            <h1>Operating Systems Development</h1>
+            <p>OS Development built on a GNU Crosscompiler and deployed using QEMU</p>
             <p><a class="btn btn-lg btn-primary" href="OSDev.html">Learn more</a></p>
           </div>
         </div>
       </div>
+      <div class="carousel-item">
+        <img src="raycaster.png" class="d-block w-100 img-fluid" alt="OS Development Project">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Raycaster</h1>
+            <p>Raycaster built using OpenGL</p>
+            <p><a class="btn btn-lg btn-primary" href="OSDev.html">Learn more</a></p>
+          </div>
+        </div>
+      </div>
+
       <div class="carousel-item">
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
         <div class="container">
@@ -66,6 +78,8 @@
           </div>
         </div>
       </div>
+
+
 
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
@@ -126,12 +140,12 @@
               <div class="text-center">
                   <!-- Circular image holder -->
                   <div class="mb-3">
-                      <img src="/placeholder.svg?height=150&width=150" class="rounded-circle img-fluid" alt="Profile Image 3" style="width: 150px; height: 150px; object-fit: cover;">
+                      <img src="raycaster.png" class="rounded-circle img-fluid" alt="Profile Image 3" style="width: 150px; height: 150px; object-fit: cover;">
                   </div>
                   
                   <!-- Text below image -->
-                  <h5>Mike Johnson</h5>
-                  <p class="text-muted">Data Scientist</p>
+                  <h5>Raycaster</h5>
+                  <p class="text-muted">Raycaster, written in C built using OpenGL, uses bitmap textures and GLFW for keyboard inputs</p>
                   
                   <!-- Button below text -->
                   <a href="#" class="btn btn-primary">View Details</a>
@@ -158,11 +172,11 @@
 
     <div class="row featurette">
       <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading fw-normal lh-1">Oh yeah, it’s that good. <span class="text-body-secondary">See for yourself.</span></h2>
-        <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
+        <h2 class="featurette-heading fw-normal lh-1">OSDev  <span class="text-body-secondary">in QEMU</span></h2>
+        <p class="lead">Running using a hand written bootloader, running in protected mode in the bios (x86)</p>
       </div>
       <div class="col-md-5 order-md-1">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"/><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
+        <img src="osdevlol.png" class="img-fluid"style="object-fit: cover;">
       </div>
     </div>
 
@@ -170,11 +184,11 @@
 
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading fw-normal lh-1">And lastly, this one. <span class="text-body-secondary">Checkmate.</span></h2>
-        <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
+        <h2 class="featurette-heading fw-normal lh-1">Raycaster enemy <span class="text-body-secondary">Checkmate.</span></h2>
+        <p class="lead">Represented as a texture in the raycaster, follows the camera position along the ray path and if both positions intersect than a lose screen occurs.</p>
       </div>
       <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"/><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
+        <img src="scaryenemy.png" class="img-fluid"style="object-fit: cover;">
       </div>
     </div>
 
