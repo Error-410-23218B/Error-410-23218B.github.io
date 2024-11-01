@@ -32,49 +32,74 @@
 
   <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="carousel-button active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="carousel-button active" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" class="carousel-button" aria-label="Slide 2"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" class="carousel-button" aria-label="Slide 3"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" class="carousel-button" aria-label="Slide 4"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4" class="carousel-button" aria-label="Slide 5"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="5" class="carousel-button" aria-label="Slide 6"></button>
+
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item active">
+      <div class="carousel-item active" id="carousel-item-raytracer">
         <img src="raytracing.webp" class="d-block w-100 img-fluid" alt="Raytracing Project"><div class="container">
           <div class="carousel-caption text-start">
-            <h1 >Raytracing Project</h1>
-            <p class="opacity-75">A CUDA scene raytracer</p>
-            <p><a class="btn btn-lg btn-primary" href="raytracing.html">More details</a></p>
+            <h1 class = "search-text">Raytracing Project</h1>
+            <p class="opacity-75 search-text">A CUDA scene raytracer</p>
+            <p><a class="btn btn-lg btn-primary search-text" href="raytracing.html">More details</a></p>
           </div>
         </div>
       </div>
-      <div class="carousel-item">
+      <div class="carousel-item" id="carousel-item-osdev">
         <img src="OSDev.jpg" class="d-block w-100 img-fluid" alt="OS Development Project">
         <div class="container">
           <div class="carousel-caption">
-            <h1>Operating Systems Development</h1>
-            <p>OS Development built on a GNU Crosscompiler and deployed using QEMU</p>
-            <p><a class="btn btn-lg btn-primary" href="OSDev.html">Learn more</a></p>
+            <h1 class="search-text">Operating Systems Development</h1>
+            <p class="search-text">OS Development built on a GNU Crosscompiler and deployed using QEMU</p>
+            <p class="search-text"><a class="btn btn-lg btn-primary" href="OSDev.html">Learn more</a></p>
           </div>
         </div>
       </div>
-      <div class="carousel-item">
+      <div class="carousel-item" id="carousel-item-raycaster" >
         <img src="raycaster.png" class="d-block w-100 img-fluid" alt="OS Development Project">
         <div class="container">
           <div class="carousel-caption">
-            <h1>Raycaster</h1>
-            <p>Raycaster built using OpenGL</p>
-            <p><a class="btn btn-lg btn-primary" href="OSDev.html">Learn more</a></p>
+            <h1 class="search-text">Raycaster</h1>
+            <p class="search-text">Raycaster built using OpenGL</p>
+            <p class="search-text"><a class="btn btn-lg btn-primary" href="raycaster.html">Learn more</a></p>
           </div>
         </div>
       </div>
 
-      <div class="carousel-item">
+      <div class="carousel-item" id="carousel-item-java-mod">
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
         <div class="container">
           <div class="carousel-caption text-end">
-            <h1>One more for good measure.</h1>
-            <p>Some representative placeholder content for the third slide of this carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+            <h1 class="search-text">Java Mod</h1>
+            <p class="search-text">Minecraft mod using MinecraftForge.</p>
+            <p class="search-text"><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item" id="carousel-item-biology-website">
+        <img src="biology-website.png" class="d-block w-100 img-fluid" alt="OS Development Project">
+        <div class="container">
+          <div class="carousel-caption text-end">
+            <h1 class="search-text">Biology Website</h1>
+            <p class="search-text">Built using Next.js and react, deployed using Vercel</p>
+            <p class="search-text"><a class="btn btn-lg btn-primary" href="https://biology-website-3j29thr7e-fsufshs-projects.vercel.app/">Visit website</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item"id="carousel-item-vex-robotics" >
+        <img src="vex.jpg" class="d-block w-100 img-fluid" alt="OS Development Project">
+        <div class="container">
+          <div class="carousel-caption text-end">
+            <h1 class="search-text">Vex Robotics</h1>
+            <p class="search-text">Chief Programmer for Error-410 23218B V5RC Competition.</p>
+            <p class="search-text"><a class="btn btn-lg btn-primary" href="#">Visit website</a></p>
           </div>
         </div>
       </div>
@@ -104,55 +129,82 @@
           <!-- First Circle Image Holder -->
           <div class="col-md-4 mb-4">
               <div class="text-center">
-                  <!-- Circular image holder -->
                   <div class="mb-3">
                       <img src="raytracing.webp" class="rounded-circle img-fluid" alt="Profile Image 1" style="object-fit: cover;">
                   </div>
-                  
-                  <!-- Text below image -->
-                  <h5>Raytracer</h5>
-                  <p class="text-muted">A raytracer built using Nvdia's CUDA library, parallelised for the GPU</p>
-                  
-                  <!-- Button below text -->
-                  <a href="#" class="btn btn-primary">View Details</a>
+                  <h5 class="search-text">Raytracer</h5>
+                  <p class="text-muted search-text">A raytracer built using Nvidia's CUDA library, parallelised for the GPU</p>
+                  <a href="javascript:void(0);" class="btn btn-primary search-text" onclick="goToCarousel('carousel-item-raytracer');">View Details</a>
+
               </div>
           </div>
-
+    
           <!-- Second Circle Image Holder -->
           <div class="col-md-4 mb-4">
               <div class="text-center">
-                  <!-- Circular image holder -->
                   <div class="mb-3">
                       <img src="OSDev.jpg" class="rounded-circle img-fluid" alt="Profile Image 2" style="width: 150px; height: 150px; object-fit: cover;">
                   </div>
-                  
-                  <!-- Text below image -->
-                  <h5>My OS</h5>
-                  <p class="text-muted">A Custom OS, built using a GNU cross compiler and tested using QEMU</p>
-                  
-                  <!-- Button below text -->
-                  <a href="#" class="btn btn-primary">View Details</a>
+                  <h5 class="search-text">My OS</h5>
+                  <p class="text-muted search-text">A Custom OS, built using a GNU cross compiler and tested using QEMU</p>
+                  <a href="javascript:void(0);" class="btn btn-primary search-text" onclick="goToCarousel('carousel-item-osdev');">View Details</a>
+
               </div>
           </div>
-
+    
           <!-- Third Circle Image Holder -->
           <div class="col-md-4 mb-4">
               <div class="text-center">
-                  <!-- Circular image holder -->
                   <div class="mb-3">
                       <img src="raycaster.png" class="rounded-circle img-fluid" alt="Profile Image 3" style="width: 150px; height: 150px; object-fit: cover;">
                   </div>
-                  
-                  <!-- Text below image -->
-                  <h5>Raycaster</h5>
-                  <p class="text-muted">Raycaster, written in C built using OpenGL, uses bitmap textures and GLFW for keyboard inputs</p>
-                  
-                  <!-- Button below text -->
-                  <a href="#" class="btn btn-primary">View Details</a>
+                  <h5 class="search-text">Raycaster</h5>
+                  <p class="text-muted search-text">Raycaster, written in C built using OpenGL, uses bitmap textures and GLFW for keyboard inputs</p>
+                  <a href="javascript:void(0);" class="btn btn-primary search-text" onclick="goToCarousel('carousel-item-raycaster');">View Details</a>
+
+              </div>
+          </div>
+    
+          <!-- Fourth Circle Image Holder -->
+          <div class="col-md-4 mb-4">
+              <div class="text-center">
+                  <div class="mb-3">
+                      <img src="new-image.jpg" class="rounded-circle img-fluid" alt="Profile Image 4" style="width: 150px; height: 150px; object-fit: cover;">
+                  </div>
+                  <h5 class="search-text">Java Mod</h5>
+                  <p class="text-muted search-text">Description of the new project goes here.</p>
+                  <a href="javascript:void(0);" class="btn btn-primary search-text" onclick="goToCarousel('carousel-item-java-mod');">View Details</a>
+
+              </div>
+          </div>
+    
+          <!-- Fifth Circle Image Holder -->
+          <div class="col-md-4 mb-4">
+              <div class="text-center">
+                  <div class="mb-3">
+                      <img src="biology-website.png" class="rounded-circle img-fluid" alt="Profile Image 5" style="width: 150px; height: 150px; object-fit: cover;">
+                  </div>
+                  <h5 class="search-text">Biology Website</h5>
+                  <p class="text-muted search-text">Description of another project goes here.</p>
+                  <a href="javascript:void(0);" class="btn btn-primary search-text" onclick="goToCarousel('carousel-item-biology-website');">View Details</a>
+
+              </div>
+          </div>
+    
+          <!-- Sixth Circle Image Holder -->
+          <div class="col-md-4 mb-4">
+              <div class="text-center">
+                  <div class="mb-3">
+                      <img src="vex.jpg" class="rounded-circle img-fluid" alt="Profile Image 6" style="width: 150px; height: 150px; object-fit: cover;">
+                  </div>
+                  <h5 class="search-text">Vex Robotics</h5>
+                  <p class="text-muted search-text">Description of yet another project goes here.</p>
+                  <a href="javascript:void(0);" class="btn btn-primary search-text" onclick="goToCarousel('carousel-item-vex-robotics');">View Details</a>
+
               </div>
           </div>
       </div>
-  </div>
+    </div>
 
     <!-- START THE FEATURETTES -->
 
@@ -160,8 +212,8 @@
 
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading fw-normal lh-1">Cornell Box <span class="text-body-secondary">Made by CUDA Raytracer.</span></h2>
-        <p class="lead">Cornell Box scene made by CUDA raytracer. 500 Samples per pixel.</p>
+        <h2 class="featurette-heading fw-normal lh-1 search-text">Cornell Box <span class="text-body-secondary">Made by CUDA Raytracer.</span></h2>
+        <p class="lead search-text">Cornell Box scene made by CUDA raytracer. 500 Samples per pixel.</p>
       </div>
       <div class="col-md-5">
         <img src="cornell.png" class="img-fluid"style="object-fit: cover;">
@@ -172,8 +224,8 @@
 
     <div class="row featurette">
       <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading fw-normal lh-1">OSDev  <span class="text-body-secondary">in QEMU</span></h2>
-        <p class="lead">Running using a hand written bootloader, running in protected mode in the bios (x86)</p>
+        <h2 class="featurette-heading fw-normal lh-1 search-text">OSDev  <span class="text-body-secondary">in QEMU</span></h2>
+        <p class="lead search-text">Running using a hand written bootloader, running in protected mode in the bios (x86)</p>
       </div>
       <div class="col-md-5 order-md-1">
         <img src="osdevlol.png" class="img-fluid"style="object-fit: cover;">
@@ -184,8 +236,8 @@
 
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading fw-normal lh-1">Raycaster enemy <span class="text-body-secondary">Checkmate.</span></h2>
-        <p class="lead">Represented as a texture in the raycaster, follows the camera position along the ray path and if both positions intersect than a lose screen occurs.</p>
+        <h2 class="featurette-heading fw-normal lh-1 search-text">Raycaster enemy <span class="text-body-secondary">Checkmate.</span></h2>
+        <p class="lead search-text">Represented as a texture in the raycaster, follows the camera position along the ray path and if both positions intersect than a lose screen occurs.</p>
       </div>
       <div class="col-md-5">
         <img src="scaryenemy.png" class="img-fluid"style="object-fit: cover;">
@@ -193,6 +245,51 @@
     </div>
 
     <hr class="featurette-divider">
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading fw-normal lh-1 search-text">Java Mod <span class="text-body-secondary">Checkmate.</span></h2>
+        <p class="lead search-text">Represented as a texture in the raycaster, follows the camera position along the ray path and if both positions intersect than a lose screen occurs.</p>
+      </div>
+      <div class="col-md-5">
+        <img src="scaryenemy.png" class="img-fluid"style="object-fit: cover;">
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading fw-normal lh-1 search-text">Biology Website <span class="text-body-secondary">Checkmate.</span></h2>
+        <p class="lead search-text">Represented as a texture in the raycaster, follows the camera position along the ray path and if both positions intersect than a lose screen occurs.</p>
+      </div>
+      <div class="col-md-5">
+        <img src="aboutus.png" class="img-fluid"style="object-fit: cover;">
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading fw-normal lh-1 search-text">Vex Robotics <span class="text-body-secondary">Checkmate.</span></h2>
+        <p class="lead search-text">Represented as a texture in the raycaster, follows the camera position along the ray path and if both positions intersect than a lose screen occurs.</p>
+      </div>
+      <div class="col-md-5">
+        <img src="robotics.png" class="img-fluid"style="object-fit: cover;">
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+
+
 
     <!-- /END THE FEATURETTES -->
 
@@ -222,5 +319,6 @@
 <script src="js/footer.js"></script>
 <script src="js/index.js"></script>
 <script src="js/header.js"></script>
+<script src="js/carousel.js"></script>
     </body>
 </html>

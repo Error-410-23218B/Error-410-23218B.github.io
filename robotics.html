@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+<head>
+  <script src="assets/js/color-modes.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.122.0">
+  <title>Vex Robotics</title>
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+  <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/header.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/footer.css" rel="stylesheet">
+  <link href="css/blog.css" rel="stylesheet">
+  <link href="css/glow.css" rel="stylesheet">
+
+
+
+
+</head>
+
+<body class="fade-in">
+
+  <main >
+
+    <h1 class="text-center">Vex Robotics</h1>
+
+    <img src="vex.jpg" style="max-width: 75%; align-items: center; justify-content: center;"
+      class="rounded mx-auto d-block">
+
+    <div class="search-text" style="padding-left: 200px; padding-right: 200px; padding-bottom:40px; font-size: 18px;">
+
+      <h2>Introduction</h2>
+
+      <p>VEX Robotics is a leading provider of educational robotics solutions designed to engage students in STEM
+        (Science, Technology, Engineering, and Mathematics) learning through hands-on experience. The platform includes
+        hardware, software, competitions, and curriculum resources, making it a comprehensive tool for educators and
+        students alike. My contribution to the 23218B Team as Chief Programmer has been pivotal to its success</p>
+
+      <h2>Odometry </h2>
+
+      <ul>
+        <li>Odometry is a methodology that can find the robot’s position at any place on the field</li>
+        <li>By using three tracking wheels on the drivetrain, we will calculate the robot’s X,Y, and angle value based
+          on an origin point on the field.</li>
+
+        <li>Equations:
+          <ul>
+            <li> 𝚫s sin(𝛳+𝚫𝛳/2)=𝚫y</li>
+            <li> 𝚫s cos(𝛳+𝚫𝛳/2)=𝚫x</li>
+            <li> 𝚫sr -𝚫sl = 𝚫𝛳2L</li>
+          </ul>
+        </li>
+        <li>
+          We will use Odometry in autonomous to calculate where the robot is at any point in time
+        </li>
+      </ul>
+
+
+      <h2>Odometry Code Explanation</h2>
+
+      <ul>
+        <li>Each encoder is stored in a class object, which allows us to reuse the single algorithmic method for
+          multiple encoders. Variables are stored in class variables, allowing us to store it for use later on.</li>
+        <li>The local offset when no distance has been travelled is found by setting the local offset X value to amount
+          turned by the back encoder local offset Y value to amount turned by the right encoder. Else, when distance has
+          been travelled use the equation:
+        </li>
+
+        <li>New average orientation is calculated by finding the negative of the current average orientation - previous
+          absolute orientation + (change in absolute orientation/2)
+        </li>
+        <li> Convert (x,y) coordinates into (r,θ).(r means radius, θ mean angle) translate coordinates, reconvert vice
+          versa back to (x,y) coordinates.</li>
+        <li>Add together previous global offset and current global offset, then update prevGlobalOffset and return
+          absolute position from the method
+        </li>
+        <li>Jumper function to allow tracking method to be ran in a task, allowing for parallel programming.</li>
+
+      </ul>
+
+      <h2>PID</h2>
+      <ul>
+        <h3>P-Proportional</h3>
+        <ul>
+          <li>Proportional decelerates the drive as it approaches the target </li>
+          <li>By calculating the error(distance from the target), we will multiply this by a gain factor so the closer
+            the robot gets to its target, the smaller error will be</li>
+          <li>We will use this to decelerate the robot in drive commands</li>
+          <li>Equation : K<sub>p</sub> e(t) </li>
+        </ul>
+
+        <h3>I- Integral</h3>
+        <ul>
+          <li>Integral accelerates the drive when proportional undershoots.</li>
+          <li>Multiplies a gain factor by the total accumulation of errors over time</li>
+          <li>We will use this to accelerate the robot as it approaches the target to insure the robot reaches its
+            destination </li>
+          <li>Equation : K<sub>i</sub> e(t) </li>
+        </ul>
+        <h3>D- Derivative</h3>
+        <ul>
+          <li>Derivative restricts rapid changes in motion for both acceleration and deceleration</li>
+          <li>Multiplies a gain factor by the change in distance from the target over the change of time </li>
+          <li>We will use this in our autonomous programs to prevent the robot from making sloppy movements that cause
+            dri~ from the intended route </li>
+          <li>Equation: K<sub>d</sub> <sup>de(t)</sup>&frasl;<sub>dt</sub></li>
+        </ul>
+
+      </ul>
+
+      <h2>Custom Drivetrain</h2>
+
+      <p>The custom drivetrain uses the PID Controller class to control the limits and control the velocity and distance
+        moved and degrees turned for the robot. Using a custom drivetrain instead of using the inbuilt vex drivetrain
+        eliminates the inaccuracies in the vex drivetrain, which makes the robot’s autonomous more accurate and work
+        more efficiently and it also means the driver control for the drivetrain is smoother and more intuitive to use.
+      </p>
+
+      <p>The code is structured in an object oriented model, where the custom drivetrain inherits from the PID
+        controller class, which is used for motion calculations, where there are various “setter” and “getter” methods
+        to abstract the underlying class logic and function for the drivetrain making it easier to use in the rest of
+        the program. The slewer algorithm also uses the time taken for the algorithm to set the max increase for the
+        slewer.</p>
+
+      <p>The custom drivetrain also implements a “slewer” algorithm which allows the drivetrain motors to synchronise
+        together and to spin up to speed by quadratically interpolating the speed(“half and half again increments”).
+        This ensures motors which are not mechanically linked spin at the same speed which ensures accurate motion
+        control.</p>
+
+      <p>The custom drivetrain also implements odometry as the main use of the algorithm as it uses the absolute
+        position, and using the aforementioned algorithms to drive towards the position on the field, where the
+        orientation is changed using the turning algorithm, it changes using the PID algorithms for control and it spins
+        the motor based on the amount of rotations required to turn the robot a certain amount.
+      </p>
+
+      <h2>RAMSETE Controller</h2>
+
+      <p>The RAMSETE controller unlike other controllers is designed to actively profile and control the 2D motion of
+        the robot, with the RAMSETE controller building on top of odometry it allows for the robot to accurately follow
+        a desired trajectory while it prevents the robot from overshooting or straying from a set trajectory which makes
+        it an accurate controller, where it represents the trajectory of the robot as a series of waypoints on the field
+        and plotted against time.
+      </p>
+
+      <p>It takes into account the actuators on a robot and how that affects the trajectory of the robot, it also unlike
+        other controllers, which only control the robot’s local frame (e.g change in velocity or change in distance).
+      </p>
+
+      <p>The RAMSETE controller via odometry is able to account for the robot’s global position and heading, which makes
+        it a more viable controller for an accurate autonomous.
+      </p>
+
+      <p>The RAMSETE controller also takes into account the various aspects of the robot such as the mass of the robot,
+        its inertia and the characteristics of the actuators, e.g their velocities and how that affects how the robot
+        moves, e.g Drivetrain velocity,
+      </p>
+
+    </div>
+
+    <div class="container mt-5">
+      <a href="https://github.com/Error-410-23218B/23218B-High-Stakes" target="_blank" rel="noopener noreferrer"
+        class="btn btn-dark btn-lg d-flex align-items-center justify-content-center">
+        <i class="bi bi-github me-2"></i>
+        <span class="d-none d-sm-inline">View on GitHub</span>
+        <span class="d-inline d-sm-none">GitHub</span>
+      </a>
+    </div>
+
+
+  </main>
+  <div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24">
+            <use xlink:href="#bootstrap" />
+          </svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2024 Rohan Jose</span>
+      </div>
+
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#twitter" />
+            </svg></a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#instagram" />
+            </svg></a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#facebook" />
+            </svg></a></li>
+      </ul>
+    </footer>
+  </div>
+  <script src="css/glow.css"></script>
+  <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/header.js"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>

@@ -1,71 +1,284 @@
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="auto">
-  <head><script src="assets/js/color-modes.js"></script>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.122.0">
-    <title>Raytracing Project</title>
+<head>
+  <script src="assets/js/color-modes.js"></script>
 
-
-    
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-
-<link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-<link href="css/header.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/footer.css" rel="stylesheet">
-    <link href="css/blog.css" rel="stylesheet">
-    <link href="css/glow.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.122.0">
+  <title>OSDev Project</title>
 
 
 
-    
-  </head>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+  <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/header.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/footer.css" rel="stylesheet">
+  <link href="css/blog.css" rel="stylesheet">
+  <link href="css/glow.css" rel="stylesheet">
+
+
+
+
+</head>
 
 <body class="fade-in">
 
-<main>
+  <main>
 
-  <h1 class="text-center">OSDev Project</h1>
+    <h1 class="text-center search-text">OSDev Project</h1>
+
+    <img src="OSDev.jpg" max-width: 75%; align-items: center; justify-content: center;" class="rounded mx-auto d-block">
+
+    <div style="padding-left: 200px; padding-right: 200px; padding-bottom:40px; font-size: 18px;">
+      <h2>GNU Cross Compiler</h2>
+
+      <p class="search-text">If you're diving into OS development, one of the first steps is building a cross-compiler—a tool that lets you
+        compile code for an environment different from your own. For OS newbies, setting up a GCC cross-compiler
+        targeting
+        i686-elf is key. This configuration provides a 32-bit setup, perfect for booting with GRUB, a widely-used
+        bootloader, and avoiding headaches with Linux-specific binaries that aren’t compatible with custom OS needs.</p>
+
+      <h2 class="search-text">Code Structure</h2>
+
+      <p class="search-text">
+        Once the cross-compiler is set up, your minimal OS needs just three files:
+      </p>
+
+      <ul style="text-align: left; list-style-type: disc;">
+        <li class="search-text">boot.s, which contains essential assembly code to initialize the processor</li>
+        <li class="search-text">kernel.c for the main OS routines</li>
+        <li class="search-text">linker.ld to link it all together</li>
+      </ul>
+
+      <h2 class="search-text">GNU Grub</h2>
+
+      <p class="search-text">GRUB will search for a specific Multiboot header in boot.s to load the OS, ensuring that everything is set up
+        properly for the kernel to take over.</p>
+
+      <p class="search-text">For a starter OS, a simple text output via the VGA buffer is a great way to start. Just remember: newer
+        machines might not support this text mode, so it’s worth learning about framebuffer graphics if you want
+        future-proof compatibility. Writing your kernel in C++? Go for it—just keep in mind some features are limited,
+        like exceptions and memory allocation.</p>
+
+      <p class="search-text">
+        Testing your OS is easy, too, thanks to QEMU, a virtual machine that speeds up development by letting you see
+        changes live, no constant rebooting required. With these basics in place, you’re ready to get your "Hello World"
+        OS running!
+      </p>
+
+      <h2 class="search-text">Sysroot</h2>
+
+      <p class="search-text">
+        When building a custom operating system (OS), system roots or "sysroots" allow for a contained directory
+        structure resembling the root of your OS. This directory structure stores components like headers and libraries
+        in locations that mimic traditional system directories (/usr/include, /usr/lib). The sysroot acts as a sandbox,
+        holding OS-specific development files and facilitating the build process. In this setup, kernel headers are
+        stored separately for modularity, and the GNU GRUB bootloader and Multiboot standard are used for kernel
+        booting.</p>
+
+      <h2 class="search-text">LibC/LibK</h2>
+      <p class="search-text">
+        To ensure compatibility, the libc (standard library) is split into two versions: a standalone version (libk)
+        that excludes user-space code, and a basic libc.a for future user-space. Each library function is modularly
+        placed in separate files, and custom macros like __is_kernel, __is_libc, and __is_libk help code discern its
+        environment. The configuration and build scripts also employ flags to prevent standard library searches and
+        allow custom paths.
+      </p>
+
+      <h2 class="search-text">Interrupts</h2>
+
+      <p class="search-text">
+        In computing, interrupts are essential mechanisms that allow devices to send signals to the CPU to temporarily
+        pause its current task and execute specific code to address the interrupting device's request. For instance, a
+        keyboard might signal an interrupt when a key is pressed, prompting the CPU to display the character on-screen
+        immediately, then return to its previous task.
+      </p>
+
+      <h2 class="search-text">Types of Interrupts</h2>
+      <p class="search-text">
+        Interrupts generally fall into three main categories:
+      </p>
+
+      <ul style="text-align: left; list-style-type: disc;">
+        <li class="search-text">Exceptions: These are internally generated by the CPU to alert the operating system (OS) of events like
+          faults or errors that require attention, such as page faults or division errors.</li>
+        <li class="search-text">Hardware Interrupts (IRQs): These originate from external devices, like a keyboard or hard drive, and signal
+          the CPU via dedicated interrupt lines or messages. They’re managed by an Interrupt</li>
+        <li class="search-text">Request Controller (IRQ Controller), like the Intel 8259, which serializes and prioritizes interrupts before
+          sending them to the CPU. IRQs can be communicated through:</li>
+        <li class="search-text">Pin-based IRQs: Using physical connections (lines) to transmit interrupts.</li>
+        <li class="search-text">Message Signaled Interrupts (MSIs): Sending data to a specific memory location, triggering an interrupt,
+          commonly used in PCI buses.</li>
+        <li class="search-text">Software Interrupts: Initiated by software, these interrupts prompt the OS to perform actions like system
+          calls. On x86 systems, the "INT" instruction triggers software interrupts, often using a specific vector, such
+          as 0x80, to signal the kernel.</li>
+      </ul>
+
+      <h2 class="search-text">
+        The Interrupt Descriptor Table (IDT)
+
+      </h2>
+
+      <p class="search-text">The IDT is a lookup table used by the CPU to find the appropriate interrupt service routine (ISR) for a given
+        interrupt. In x86 systems, this table can contain up to 256 entries, with the first 32 vectors often reserved
+        for exceptions. The IDT allows the CPU to seamlessly jump to the correct ISR to handle each interrupt type.</p>
+
+      <h2 class="search-text">
+        How the Programmable Interrupt Controller (PIC) Works
+
+      </h2>
+
+      <p class="search-text">The PIC organizes and prioritizes hardware interrupts. In most systems, two PICs handle up to 16 different
+        IRQs, with one serving as the master PIC and the other as a slave PIC. When a device requests an interrupt, it’s
+        sent to the slave PIC, which signals the master PIC, which, in turn, notifies the CPU.</p>
 
 
-<p>OSDev is hellish.</p>
-<div class="d-flex justify-content-center align-items-center">
-  <a href="https://github.com/Rohan-Jose-08/OSDev">
-<button id="gradientButton" class="gradient-button">
-  <i class="bi bi-github me-2"></i>
-                <span class="d-none d-sm-inline">View on GitHub</span>
-                <span class="d-inline d-sm-none">GitHub</span>
-</button>
-</a>
-</div>
-</main>
-      <div class="container">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
-          <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-            <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-          </a>
-          <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2024 Rohan Jose</span>
-        </div>
-    
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-          <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
-          <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
-          <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
-        </ul>
-      </footer>
+      <p class="search-text">By default, certain IRQs (like IRQ 0-7) are assigned specific interrupt vectors (08h-0Fh), and higher IRQs
+        (8-15) map to vectors 70h-77h. However, to avoid conflicts with reserved CPU interrupts, the PIC can be
+        reprogrammed to use different vectors for these IRQs.</p>
+
+      <h2 class="search-text">Handling Interrupts in the OS </h2>
+
+      <p class="search-text">When an interrupt is detected, the OS, through its preconfigured IDT, initiates an interrupt handler (or ISR).
+        This handler communicates with the interrupting device, performs the necessary tasks (like processing a key
+        press), and then signals the PIC that it’s ready to handle additional interrupts. Finally, the CPU returns to
+        its previous state using the iret instruction, which restores the saved state information from the stack.</p>
+
+      <h2 class="search-text">Controlling Interrupts with the CPU’s Interrupt Flag
+      </h2>
+
+      <p class="search-text">The CPU’s Interrupt Flag (IF) in the status register determines whether it should respond to interrupts. By
+        clearing this flag (using the cli instruction), the CPU will ignore interrupts, allowing critical operations to
+        proceed uninterrupted. When ready, the IF can be set again using sti, re-enabling the response to incoming
+        interrupts.</p>
+
+      <h2 class="search-text">Global Descriptor Table</h2>
+
+      <p class="search-text">The Global Descriptor Table (GDT) is a critical component in x86 architecture that the CPU uses to manage
+        memory access and establish a secure environment in protected mode. The GDT holds descriptors, which define the
+        properties of memory segments like base address, size, and access rights. These descriptors control how code,
+        data, and system segments are accessed, helping the CPU enforce privilege levels and maintain stability.</p>
+
+      <h2 class="search-text">Purpose of the GDT</h2>
+
+      <p class="search-text">The GDT is used primarily for two functions:</p>
+
+      <ul style="text-align: left; list-style-type: disc;">
+        <li class="search-text">Memory Segmentation: By defining segments, it allows the CPU to access specific areas of memory based on
+          rules set in each segment’s descriptor. Segmentation provides isolation and protects critical sections of
+          memory.</li>
+
+        <li class="search-text">Privilege Levels: The GDT enables access control to memory regions based on privilege levels, allowing
+          certain code or data to be accessible only to specific processes, such as the kernel or applications.</li>
+      </ul>
+
+      <h2 class="search-text">Structure of the GDT </h2>
+
+      <p class="search-text">The GDT is a table in memory that contains entries called descriptors. Each descriptor holds information for a
+        segment, which includes: </p>
+
+      <ul style="text-align: left; list-style-type: disc;">
+        <li class="search-text">Base Address: The starting address of the memory segment.</li>
+        <li class="search-text">Segment Limit: The size or boundary of the segment.</li>
+        <li class="search-text">Access Byte: This byte indicates the segment type, privilege level, and whether it’s executable, readable,
+          writable, etc.</li>
+        <li class="search-text">Flags: These bits specify the segment type and size, such as whether the segment is 32-bit or 64-bit.</li>
+      </ul>
+
+      <h2 class="search-text">Types of Segments in the GDT</h2>
+
+      <p class="search-text">The GDT can define different segment types for different purposes:</p>
+
+      <ul style="text-align: left; list-style-type: disc;">
+        <li class="search-text">Code Segment: Stores the code that the CPU executes. Typically marked as executable and readable.</li>
+        <li class="search-text">Data Segment: Stores data used by programs. This segment can be readable, writable, but not executable.</li>
+        <li class="search-text">Stack Segment: Used for the stack, where function call return addresses and local variables are stored.</li>
+        <li class="search-text">System Segments: Include the Task State Segment (TSS) and Local Descriptor Table (LDT). The TSS is crucial
+          in multitasking, as it holds information about task states, while the LDT offers additional segmentation for a
+          particular process.</li>
+
+      </ul>
+
+<h2 class="search-text">How the CPU Uses the GDT</h2>
+
+<ul style="text-align: left; list-style-type: disc;">
+  <li class="search-text">Protected Mode: When the CPU is in protected mode, it uses the GDT to manage memory access by using selectors, which are pointers to specific entries in the GDT.</li>
+  <li class="search-text">Segmentation in Execution: Each memory access (code execution, data fetch, etc.) involves a segment selector, which points to a specific descriptor in the GDT. The CPU reads the descriptor to interpret the properties of that memory segment.</li>
+  <li class="search-text">Privilege Levels: The GDT allows up to four privilege levels (0-3). The OS kernel typically runs at level 0, while user applications operate at level 3. This isolation protects critical OS code and data from being accessed by less privileged software.</li>
+
+</ul>
+
+<h2 class="search-text">Loading the GDT</h2>
+
+<p class="search-text">To use the GDT, the CPU needs to know its address, which is loaded using the lgdt instruction with a special structure called the GDTR (Global Descriptor Table Register). The GDTR stores the base address and limit of the GDT, letting the CPU locate the GDT quickly.</p>
+
+<h2 class="search-text">Practical Uses in an OS</h2>
+
+<p class="v">Operating systems set up a GDT at boot and configure segments for kernel and user space. They use the GDT for:</p>
+
+<ul style="text-align: left; list-style-type: disc;">
+  <li class="search-text">Memory Protection: Prevents user-space applications from accessing kernel memory.
+  </li>
+  <li class="search-text">Task Switching: Uses the TSS descriptor in the GDT for saving and restoring task states during context switches.
+  </li>
+
+  <li class="search-text">Multitasking and Privilege Separation: Ensures that only privileged code can execute critical tasks, safeguarding the system from potential vulnerabilities in user applications.
+  </li>
+
+</ul>
+
+
+
+
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center">
+      <a href="https://github.com/Rohan-Jose-08/OSDev">
+        <button id="gradientButton" class="gradient-button">
+          <i class="bi bi-github me-2"></i>
+          <span class="d-none d-sm-inline">View on GitHub</span>
+          <span class="d-inline d-sm-none">GitHub</span>
+        </button>
+      </a>
+    </div>
+  </main>
+  <div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24">
+            <use xlink:href="#bootstrap" />
+          </svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2024 Rohan Jose</span>
+      </div>
+
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#twitter" />
+            </svg></a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#instagram" />
+            </svg></a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#facebook" />
+            </svg></a></li>
+      </ul>
+    </footer>
   </div>
-      <script src="css/glow.css"></script>
-      <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="js/footer.js"></script>
-      <script src="js/index.js"></script>
-      <script src="js/header.js"></script>
+  <script src="css/glow.css"></script>
+  <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/header.js"></script>
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>

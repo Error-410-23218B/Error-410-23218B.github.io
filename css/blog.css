@@ -7,20 +7,24 @@ main {
 
   }
 
-h1{
+main h1{
+    text-align: center;
     padding-bottom: 20px;
 
 }
+
+
 
 img{
     padding-bottom:20px;
  
 }
 
-p{
+
+
+main p{
     
-    padding-left: 6rem;
-    padding-right:6rem;
+    padding-bottom: 1rem;
     
 }
   body {
@@ -29,3 +33,6 @@ p{
     color: rgb(var(--bs-tertiary-color-rgb));
   }
   
+main li{
+  margin-bottom: 10px
+}

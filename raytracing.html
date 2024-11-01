@@ -1,25 +1,27 @@
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="auto">
-  <head><script src="assets/js/color-modes.js"></script>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.122.0">
-    <title>Raytracing Project</title>
+<head>
+  <script src="assets/js/color-modes.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.122.0">
+  <title>Raytracing Project</title>
 
 
-    
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-<link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-<link href="css/header.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="css/footer.css" rel="stylesheet">
-    <link href="css/blog.css" rel="stylesheet">    
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+  <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/header.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="css/footer.css" rel="stylesheet">
+  <link href="css/blog.css" rel="stylesheet">
 </head>
 
 
@@ -31,58 +33,137 @@
 <body class="fade-in">
 
 
-<main>
+  <main>
 
-        <h1 class="text-center">Raytracing Project</h1>
-        <img src="raytracing.webp" style="max-width: 75%; align-items: center; justify-content: center;"  class="rounded mx-auto d-block">
-        <p>In this post, we'll be exploring a CUDA-accelerated ray tracing renderer written in C++. Ray tracing is a rendering technique used to generate photorealistic images by simulating the way light behaves in the real world. It's a computationally intensive task, making it an ideal candidate for acceleration using NVIDIA's CUDA platform. We'll break down the code, explaining each component and how it contributes to the overall rendering process.</p>
+    <h1>Raytracing Project</h1>
+    <img src="raytracing.webp" style="max-width: 75%; align-items: center; justify-content: center;"
+      class="rounded mx-auto d-block">
+    <div class="search-text" style="padding-left: 200px; padding-right: 200px; padding-bottom:40px; font-size: 18px;">
+      <p>This post provides a detailed, step-by-step guide for building a GPU-based ray tracing engine using NVIDIA's
+        CUDA platform. It emphasizes the performance benefits of GPU computation, as CUDA enables faster processing of
+        image rendering tasks, especially when compared to traditional CPU-based approaches. Here’s a breakdown of the
+        key concepts and processes outlined for setting up this system.</p>
 
-        <p>Includes and Definitions: The code starts with a list of includes for various libraries, including CUDA, OpenMP, and custom headers for vector math and ray tracing data structures.Error Handling: A custom error handling function, checkCudaErrors, is defined to handle CUDA errors.Device Functions: Several device functions are defined, including color, rand_init, render_init, render, create_world, and free_world. These functions will be executed on the GPU.Main Function: The main function is responsible for initializing the renderer, allocating memory, and launching the rendering kernel.</p>
+      <h2>Introduction to Ray Tracing</h2>
+      <p>Ray tracing simulates the way light interacts with objects in a virtual environment to produce realistic
+        images. With NVIDIA’s Turing GPUs, RTX technology, and DirectX Ray Tracing, ray tracing has become more
+        accessible and powerful. However, for those who wish to understand the workings behind it, coding a ray tracing
+        engine provides insight into its mathematical and computational principles.</p>
 
-        <p>The color function is responsible for calculating the color of a ray as it interacts with the scene. It takes a ray object, a hitable list, and a curandState object as input. The function recursively calls itself to simulate the way light bounces around the scene, eventually returning the final color of the ray.</p>
+      <h2>Learning Resources </h2>
 
-        <p>The rand_init function initializes a curandState object, which is used to generate random numbers on the GPU.</p>
+      <p>Peter Shirley’s "Ray Tracing in One Weekend" series is a beginner-friendly set of resources available for free.
+        Shirley’s books cover the fundamentals of ray tracing in a progression from basic concepts to more complex ones,
+        making it an ideal foundation for implementing ray tracing on GPUs. The original C++ code provided in the books
+        can be transformed into CUDA-compatible code, leveraging GPU power to speed up the rendering</p>
 
-        <p>The render function is the core of the renderer. It takes a vec3 array (the framebuffer), image dimensions, number of samples per pixel, camera, world, and random state as input. The function launches a kernel that iterates over each pixel in the image, generating a ray for each pixel and calling the color function to calculate its color.</p>
+      <p style="text-align: left;">
+        The CUDA version of the ray tracer translates Shirley’s C++ implementation into GPU-friendly code, gaining up to
+        a 10x performance boost:
+      </p>
 
-        <p>The create_world function creates a scene by allocating memory for a list of hitable objects and initializing them with random materials and positions.</p>
+      <ul style="text-align: left; list-style-type: disc;">
+        <li>File Naming: Change the primary C++ file’s extension from .cc to .cu to indicate CUDA code.</li>
+        <li>Error Handling: Implement a checkCudaErrors macro to manage CUDA’s error codes, which ensures smooth
+          debugging and device resetting.</li>
+        <li>Memory Allocation: Allocate frame buffer memory using cudaMallocManaged, allowing Unified Memory access for
+          seamless data transfer between CPU and GPU.</li>
+        <li>Kernel Launch: The rendering kernel (render) is launched on blocks of threads (e.g., 8x8 blocks) to
+          parallelize the work of coloring each pixel.</li>
 
-        <p>The free_world function frees the memory allocated for the scene.</p>
-        
+      </ul>
 
-        <!-- Place this tag where you want the button to render. -->
-        <div class="container mt-5">
-            <a href="https://github.com/Rohan-Jose-08/Raytracing-GPU" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-lg d-flex align-items-center justify-content-center">
-                <i class="bi bi-github me-2"></i>
-                <span class="d-none d-sm-inline">View on GitHub</span>
-                <span class="d-inline d-sm-none">GitHub</span>
-            </a>
-        </div>
-</main>
-    
+      <h2>Implementing Core Functions in CUDA</h2>
 
- 
+      <p style="text-align: left;">The CUDA engine begins by constructing a gradient image,
+        progressively advancing through these steps:</p>
+
+      <ul style="text-align: left; list-style-type: disc;">
+        <li>File Naming: Change the primary C++ file’s extension from .cc to .cu to indicate CUDA code.</li>
+        <li>Color Calculation: The render kernel computes pixel colors by mapping coordinates to color values (RGB).
+        </li>
+
+        <li>Vector Operations: Define vector classes with __host__ __device__ annotations to support CPU and GPU
+          compatibility. This approach allows for optimized vector manipulation, necessary for 3D rendering.</li>
+        <li>Ray Class: Introduce the ray class with __device__ annotations to create rays within the kernel.</li>
+      </ul>
+
+      <h2>Optimizing Performance</h2>
+
+      <p>CUDA’s performance hinges on using single precision floats, as double precision can be much slower. CUDA
+        profiling tools like nvprof help identify any accidental double-precision calculations. Profiling helps ensure
+        that the code remains efficient on GPUs, particularly when using random number generation with cuRAND.</p>
+
+      <h2>Memory Management</h2>
+
+      <p style="text-align: left;"> Memory management on the GPU is crucial. Each class that interacts
+        with the GPU (such as hitable and sphere) must be allocated and freed correctly:</p>
+
+      <ul style="text-align: left; list-style-type: disc;">
+
+        <li>Allocate lists of hitable objects on the GPU.</li>
+        <li>Define a create_world kernel to initialize objects in the scene.</li>
+        <li>Clean up memory with the free_world kernel to delete objects after rendering.</li>
+
+      </ul>
+
+      <h2> Handling Randomness</h2>
+      <p>Ray tracing often incorporates randomness for effects like shadows and reflections. CUDA’s cuRAND library is
+        used to initialize random states for each thread. This setup ensures that each thread can generate its own
+        random numbers, allowing for realistic rendering without excessive CPU-GPU synchronization overhead.</p>
+
+      <h2>Summary</h2>
+
+      <p>The steps in this guide lay the groundwork for a powerful GPU-based ray tracing engine that leverages CUDA’s
+        parallel processing capabilities. The approach begins with a fundamental understanding of ray tracing and
+        progresses into memory management, randomness, and profiling for optimal performance on NVIDIA hardware. For
+        developers interested in understanding and working with graphics programming, implementing a CUDA-based ray
+        tracer provides practical experience in both ray tracing theory and GPU programming.</p>
+
+    </div>
+
+    <!-- Place this tag where you want the button to render. -->
+    <div class="container mt-5">
+      <a href="https://github.com/Rohan-Jose-08/Raytracing-GPU" target="_blank" rel="noopener noreferrer"
+        class="btn btn-dark btn-lg d-flex align-items-center justify-content-center">
+        <i class="bi bi-github me-2"></i>
+        <span class="d-none d-sm-inline">View on GitHub</span>
+        <span class="d-inline d-sm-none">GitHub</span>
+      </a>
+    </div>
+  </main>
 
 
-    <div class="container fade-in">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
-          <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-            <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-          </a>
-          <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2024 Rohan Jose</span>
-        </div>
-    
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-          <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
-          <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
-          <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
-        </ul>
-      </footer>
+
+
+
+  <div class="container fade-in">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24">
+            <use xlink:href="#bootstrap" />
+          </svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2024 Rohan Jose</span>
+      </div>
+
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#twitter" />
+            </svg></a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#instagram" />
+            </svg></a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#facebook" />
+            </svg></a></li>
+      </ul>
+    </footer>
   </div>
-    <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/footer.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/header.js"></script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-  </body>
+  <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/header.js"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>

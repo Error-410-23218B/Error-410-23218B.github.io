@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+<head>
+  <script src="assets/js/color-modes.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.122.0">
+  <title>Raycaster Project</title>
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+  <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/header.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/footer.css" rel="stylesheet">
+  <link href="css/blog.css" rel="stylesheet">
+  <link href="css/glow.css" rel="stylesheet">
+
+
+
+
+</head>
+
+<body class="fade-in">
+
+  <main>
+
+    <h1 class="text-center">Raycaster Project</h1>
+
+    <img src="raycaster.png" max-width: 75%; align-items: center; justify-content: center;" class="rounded mx-auto d-block">
+
+    <div class="search-text" style="padding-left: 200px; padding-right: 200px; padding-bottom:40px; font-size: 18px;">
+
+        <article>
+            <p>In the realm of video game development, <strong>raycasting</strong> stands as a foundational technique for generating 3D-like graphics in 2D engines. Pioneered by iconic games like <em>Wolfenstein 3D</em> in the early 1990s, raycasting allowed developers to simulate three-dimensional environments on limited hardware. Today, understanding raycasting isn't just an homage to retro gaming; it is a great way to grasp the fundamentals of 3D graphics and game engine development. Here, we'll break down what a raycaster game engine is, how it works, and the key elements that make it tick.</p>
+            
+            <h2>What is Raycasting?</h2>
+            <p>Raycasting is a rendering technique that simulates a 3D environment by casting rays from the player’s viewpoint to determine visible surfaces. Each ray finds the distance to an obstacle and translates that into a line on the screen, which creates the illusion of walls, floors, and ceilings in a 3D space. Although the technique doesn’t render full 3D geometry, it convincingly simulates it by focusing on what's visible from a player’s viewpoint.</p>
+    
+            <h2>Core Principles of Raycasting</h2>
+            <p>Raycasting is about <strong>using rays as detectors</strong>—lines from the player’s perspective that hit walls and other obstacles, establishing how these elements should be drawn on the screen. It’s a more efficient process than traditional 3D rendering since it calculates only the visible areas, making it especially efficient for systems with limited processing power.</p>
+            
+            <p>The key principles behind raycasting include:</p>
+            <ul>
+                <li><strong>Field of View (FOV):</strong> Determines the number of rays cast from the player. Wider FOV means more rays and, therefore, a more immersive experience.</li>
+                <li><strong>Resolution of Rays:</strong> Defines the "density" of rays across the screen. Higher ray density yields smoother images but demands more computational power.</li>
+                <li><strong>Distance Scaling:</strong> Adjusts the height of walls according to their distance from the player, creating a perspective effect.</li>
+                <li><strong>Projection Plane:</strong> This is the player’s "screen" in the game world, where distances are translated into vertical lines to simulate depth.</li>
+            </ul>
+    
+            <h2>Step-by-Step Breakdown of How Raycasting Works in Game Engines</h2>
+            <h3>1. Player Perspective and Field of View</h3>
+            <p>In raycasting, everything starts from the <strong>player's viewpoint</strong>. Imagine a 2D grid where the player occupies a specific cell. The player can look in a particular direction, and within that direction, they have a <strong>field of view</strong> (FOV). This FOV is split into equal segments, each representing a ray.</p>
+    
+            <h3>2. Casting Rays</h3>
+            <p>From the player’s position, the engine <strong>casts rays</strong> at regular intervals within the FOV. Each ray represents a line of sight and moves forward step-by-step until it hits a wall or an object. This process is known as <strong>DDA (Digital Differential Analysis)</strong>, which increments the ray in small steps through the 2D grid until it intersects with a wall.</p>
+    
+            <p>Each ray’s role is twofold:</p>
+            <ul>
+                <li>It determines <strong>if and where</strong> it hits a wall.</li>
+                <li>It calculates the <strong>distance</strong> from the player to the wall.</li>
+            </ul>
+    
+            <h3>3. Calculating Distance and Projecting Walls</h3>
+            <p>Once a ray hits a wall, the engine calculates the <strong>distance</strong> from the player to the wall. Using trigonometric functions, the engine accounts for the player’s viewing angle to avoid distortion, often called <strong>fish-eye effect</strong>. With the distance in hand, the engine can calculate the height of the wall on the screen, projecting it onto a 2D plane. The further away the wall, the shorter it appears, simulating depth.</p>
+    
+            <h3>4. Drawing the Projection</h3>
+            <p>The raycasting engine now has the necessary data to draw each wall section on the screen:</p>
+            <ul>
+                <li><strong>Wall height</strong> is scaled based on distance.</li>
+                <li><strong>Texture mapping</strong> applies any textures (like brick patterns) to the wall for added realism.</li>
+                <li><strong>Shading</strong> often varies with distance, dimming further objects to simulate atmospheric perspective.</li>
+            </ul>
+            <p>Each ray represents a vertical slice of the wall, and these slices are drawn side-by-side to fill the entire screen width.</p>
+    
+            <h3>5. Handling Movement and Rotation</h3>
+            <p>Raycasting engines are dynamic, and the player’s position or view angle can change. Movement involves updating the player’s location in the 2D grid, while <strong>rotation</strong> modifies the direction of rays within the FOV. With each movement or rotation, the engine re-casts rays from the updated perspective, providing an interactive, responsive environment.</p>
+    
+            <h3>6. Optimization Techniques</h3>
+            <p>Raycasting engines employ a few common optimizations to improve performance:</p>
+            <ul>
+                <li><strong>Reducing Resolution:</strong> Lowering ray density can improve performance at the cost of some visual quality.</li>
+                <li><strong>Column Skipping:</strong> For walls that share alignment (e.g., straight corridor walls), the engine can skip unnecessary columns to reduce computation.</li>
+                <li><strong>Binary Space Partitioning (BSP):</strong> In more advanced implementations, the environment is pre-processed into smaller sections to avoid rendering unseen areas.</li>
+            </ul>
+    
+            <h2>Beyond Basics: Adding Floors, Ceilings, and Sprites</h2>
+            <p>For true 3D immersion, raycasting engines often include <strong>floors and ceilings</strong>, which can be drawn similarly to walls but scaled differently. Some engines incorporate <strong>sprites</strong>—images like enemies or items that are rendered at specific points, simulating interaction within the 3D space. Sprites are typically rendered after walls to maintain the illusion of depth.</p>
+    
+            <h2>Challenges in Raycasting</h2>
+            <p>Raycasting, while powerful, does have limitations:</p>
+            <ul>
+                <li><strong>Fish-eye Distortion:</strong> Without correction, rays cast at oblique angles can distort wall shapes.</li>
+                <li><strong>Complex Shapes and Elevation:</strong> Raycasting struggles with non-rectangular shapes and vertical elements like slopes.</li>
+                <li><strong>Performance at High Resolutions:</strong> Each additional ray adds processing load, so rendering high-resolution environments can become taxing.</li>
+            </ul>
+    
+            <h2>Real-World Examples of Raycasting Game Engines</h2>
+            <p>Some classic games used raycasting techniques innovatively:</p>
+            <ul>
+                <li><strong>Wolfenstein 3D:</strong> Often regarded as the first true first-person shooter, it used basic textures and raycasting to create immersive corridors.</li>
+                <li><strong>Doom:</strong> Although technically a step up with a pseudo-3D engine, <em>Doom</em> borrowed heavily from raycasting principles.</li>
+                <li><strong>Minecraft (Raycasting for Block Picking):</strong> In a different use, <em>Minecraft</em> uses raycasting to determine which block a player is pointing at, applying raycasting principles to 3D environments.</li>
+            </ul>
+    
+            <h2>Conclusion</h2>
+            <p>Raycasting is an accessible yet powerful technique for simulating 3D spaces, especially in environments with limited resources. Despite its age, the concepts behind raycasting are fundamental to graphics programming, providing a stepping stone toward understanding more advanced 3D rendering techniques. Whether you’re creating a retro-style game or learning game development fundamentals, raycasting remains a fascinating and rewarding method to explore.</p>
+        </article>
+
+    </div>
+
+    <div class="container mt-5">
+        <a href="https://github.com/Rohan-Jose-08/RayCaster" target="_blank" rel="noopener noreferrer"
+          class="btn btn-dark btn-lg d-flex align-items-center justify-content-center">
+          <i class="bi bi-github me-2"></i>
+          <span class="d-none d-sm-inline">View on GitHub</span>
+          <span class="d-inline d-sm-none">GitHub</span>
+        </a>
+      </div>
+
+
+  </main>
+  <div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24">
+            <use xlink:href="#bootstrap" />
+          </svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2024 Rohan Jose</span>
+      </div>
+
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#twitter" />
+            </svg></a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#instagram" />
+            </svg></a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#facebook" />
+            </svg></a></li>
+      </ul>
+    </footer>
+  </div>
+  <script src="css/glow.css"></script>
+  <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/header.js"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
