@@ -32,6 +32,22 @@ function createFooter(){
       </symbol>
     </svg>
 
+
+      <footer class="mt-auto text-white-50">
+        <div class="container">
+          <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+              <span class="mb-3 mb-md-0 text-white-50">&copy; 2024 Rohan Jose</span>
+            </div>
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+              <li class="ms-3"><a class="text-white-50" href="#"><i class="bi bi-twitter"></i></a></li>
+              <li class="ms-3"><a class="text-white-50" href="#"><i class="bi bi-linkedin"></i></a></li>
+              <li class="ms-3"><a class="text-white-50" href="https://github.com/Rohan-Jose-08"><i class="bi bi-github"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+
     `
 
     document.body.innerHTML += footerHtml
