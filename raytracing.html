@@ -22,6 +22,8 @@
   <!-- Custom styles for this template -->
   <link href="css/footer.css" rel="stylesheet">
   <link href="css/blog.css" rel="stylesheet">
+  <link href="css/glow.css" rel="stylesheet">
+
 </head>
 
 
@@ -35,10 +37,10 @@
 
   <main>
 
-    <h1>Raytracing Project</h1>
+    <h1 class="search-text">Raytracing Project</h1>
     <img src="raytracing.webp" style="max-width: 75%; align-items: center; justify-content: center;"
       class="rounded mx-auto d-block">
-    <div class="search-text" style="padding-left: 200px; padding-right: 200px; padding-bottom:40px; font-size: 18px;">
+    <div id="search-container" style="padding-left: 200px; padding-right: 200px; padding-bottom:40px; font-size: 18px;">
       <p>This post provides a detailed, step-by-step guide for building a GPU-based ray tracing engine using NVIDIA's
         CUDA platform. It emphasizes the performance benefits of GPU computation, as CUDA enables faster processing of
         image rendering tasks, especially when compared to traditional CPU-based approaches. Here’s a breakdown of the
@@ -62,13 +64,13 @@
         a 10x performance boost:
       </p>
 
-      <ul style="text-align: left; list-style-type: disc;">
-        <li>File Naming: Change the primary C++ file’s extension from .cc to .cu to indicate CUDA code.</li>
-        <li>Error Handling: Implement a checkCudaErrors macro to manage CUDA’s error codes, which ensures smooth
+      <ul style="text-align: left; list-style-type: disc;" id="search-container">
+        <li class="search-text">File Naming: Change the primary C++ file’s extension from .cc to .cu to indicate CUDA code.</li>
+        <li class="search-text">Error Handling: Implement a checkCudaErrors macro to manage CUDA’s error codes, which ensures smooth
           debugging and device resetting.</li>
-        <li>Memory Allocation: Allocate frame buffer memory using cudaMallocManaged, allowing Unified Memory access for
+        <li class="search-text">Memory Allocation: Allocate frame buffer memory using cudaMallocManaged, allowing Unified Memory access for
           seamless data transfer between CPU and GPU.</li>
-        <li>Kernel Launch: The rendering kernel (render) is launched on blocks of threads (e.g., 8x8 blocks) to
+        <li class="search-text">Kernel Launch: The rendering kernel (render) is launched on blocks of threads (e.g., 8x8 blocks) to
           parallelize the work of coloring each pixel.</li>
 
       </ul>
@@ -122,13 +124,14 @@
 
     </div>
 
-    <!-- Place this tag where you want the button to render. -->
-    <div class="container mt-5">
-      <a href="https://github.com/Rohan-Jose-08/Raytracing-GPU" target="_blank" rel="noopener noreferrer"
-        class="btn btn-dark btn-lg d-flex align-items-center justify-content-center">
-        <i class="bi bi-github me-2"></i>
-        <span class="d-none d-sm-inline">View on GitHub</span>
-        <span class="d-inline d-sm-none">GitHub</span>
+
+    <div class="d-flex justify-content-center align-items-center">
+      <a href="https://github.com/Rohan-Jose-08/Raytracing-GPU">
+        <button class="gradient-button">
+          <i class="bi bi-github me-2"></i>
+          <span class="d-none d-sm-inline">View on GitHub</span>
+          <span class="d-inline d-sm-none">GitHub</span>
+        </button>
       </a>
     </div>
   </main>

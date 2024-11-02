@@ -274,12 +274,20 @@ img {
   }
 }
 
+.btn::before{
+  background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 70%);
+
+}
+
 .btn {
   transition: transform 0.3s;
+  
 }
 
 .btn:hover {
   transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
 }
 
 .btn:active {

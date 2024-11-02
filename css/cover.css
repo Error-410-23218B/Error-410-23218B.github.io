@@ -34,10 +34,18 @@
   max-width: 42em;
 }
 
-
-
-.label{
+h5{
   color: var(--h1-color);
+
+}
+
+label{
+  color: var(--h1-color);
+}
+
+a{
+  color: var(--h1-color);
+
 }
 
 
