@@ -69,7 +69,7 @@ const headerText = `
               <li><a class="dropdown-item" href="raytracing.html">Raytracing Project</a></li>
               <li><a class="dropdown-item" href="OSDev.html">OSDev Project</a></li>
               <li><a class="dropdown-item" href="raycaster.html">Raycaster</a></li>
-              <li><a class="dropdown-item" href="#">Java Mod</a></li>
+              <li><a class="dropdown-item" href="mod.html">Java Mod</a></li>
               <li><a class="dropdown-item" href="https://biology-website-3j29thr7e-fsufshs-projects.vercel.app/">Biology Website</a></li>
               <li><a class="dropdown-item" href="robotics.html">Vex Robotics</a></li>
             </ul>

@@ -37,3 +37,122 @@ main p{
 main li{
   margin-bottom: 10px
 }
+
+
+ul{
+  text-align: left; 
+  list-style-type: disc;
+}
+
+pre {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-left: 3px solid #2400f3;
+  color: #d4d4d4;
+  page-break-inside: avoid;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+pre::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.25em 0.5em;
+  background-color: #0004ff;
+  color: #1e1e1e;
+  font-size: 0.75em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+code {
+  font-family: 'Consolas', 'Courier New', monospace;
+}
+
+.line-numbers {
+  counter-reset: line;
+  padding-left: 3em;
+}
+
+.line-numbers > span {
+  counter-increment: line;
+  position: relative;
+  display: block;
+}
+
+.line-numbers > span::before {
+  content: counter(line);
+  position: absolute;
+  left: -3em;
+  width: 2.5em;
+  text-align: right;
+  color: #858585;
+  font-size: 0.8em;
+}
+
+/* Syntax Highlighting */
+.keyword { color: #569cd6; }
+.string { color: #ce9178; }
+.comment { color: #6a9955; font-style: italic; }
+.number { color: #b5cea8; }
+.function { color: #dcdcaa; }
+
+
+
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  background-size: 200% 200%;
+  background-image: linear-gradient(45deg, 
+      #4CAF50, #45a049, #2E7D32, #1B5E20, 
+      #43A047, #388E3C, #2E7D32, #4CAF50);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+
+.download-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.download-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.download-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}

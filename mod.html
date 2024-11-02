@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+<head>
+  <script src="assets/js/color-modes.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.122.0">
+  <title>Java Mod</title>
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+  <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/header.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="css/footer.css" rel="stylesheet">
+  <link href="css/blog.css" rel="stylesheet">
+  <link href="css/glow.css" rel="stylesheet">
+
+</head>
+
+
+
+
+
+
+
+<body class="fade-in">
+
+
+  <main>
+
+
+    <h1 class="search-text">Java Mod</h1>
+    <img src="minecraft.png" style="max-width: 75%; align-items: center; justify-content: center;"
+      class="rounded mx-auto d-block">
+    <div id="search-container" style="padding-left: 200px; padding-right: 200px; padding-bottom:40px; font-size: 18px;">
+      <h1>Understanding Minecraft Mod Registration: A Deep Dive into the Xzier Mod</h1>
+
+      <h2>Registration System Overview</h2>
+      <p>In Minecraft modding, registration is a crucial process where we tell the game about new content. The Xzier Mod
+        uses Forge's <code>DeferredRegister</code> system, which provides a safe and organized way to register content.
+      </p>
+
+      <h2>Basic Registration Structure</h2>
+      <pre>
+        <code>
+          <span class="keyword">public</span> <span class="keyword">class</span> ItemInit {
+            // <span class="comment">Create a DeferredRegister for Items</span>
+            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> DeferredRegister&lt;Item&gt; ITEMS = 
+                DeferredRegister.create(ForgeRegistries.ITEMS, TutorialMod.MODID);
+        
+            // <span class="comment">Register individual items using RegistryObject</span>
+            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> RegistryObject&lt;Item&gt; XZIER_GEM = ITEMS.register(<span class="string">"xzier_gem"</span>,
+                () -> <span class="keyword">new</span> Item(<span class="keyword">new</span> Item.Properties().stacksTo(<span class="number">128</span>)));
+          }
+        </code>
+      </pre>
+
+      <h3>How Registration Works</h3>
+      <ul>
+        <li><strong>DeferredRegister Creation</strong>
+          <ul>
+            <li>Each type of content (Items, B  locks, Enchantments, etc.) gets its own DeferredRegister</li>
+            <li>The DeferredRegister ensures content is registered at the correct time during game startup</li>
+          </ul>
+        </li>
+        <li><strong>Event Bus Registration</strong>
+          <pre>
+            <code>
+              <span class="keyword">public</span> <span class="keyword">class</span> TutorialMod {
+                <span class="keyword">public</span> <span class="function">TutorialMod() </span> {
+                    IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+                    ItemInit.ITEMS.register(bus);
+                    BlockInit.BLOCKS.register(bus);
+                    EnchantmentInit.ENCHANTMENTS.register(bus);
+                    // <span class="comment">... other registrations</span>
+                }
+              }
+            </code>
+          </pre>
+        </li>
+      </ol>
+
+      <h2>Content Registration Examples</h2>
+
+      <h3>Block Registration</h3>
+      <pre>
+        <code>
+          <span class="keyword">public</span> <span class="keyword">class</span> BlockInit {
+            // <span class="comment">Create a DeferredRegister for Blocks</span>
+            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> DeferredRegister&lt;Block&gt; BLOCKS = 
+                DeferredRegister.create(ForgeRegistries.BLOCKS, TutorialMod.MODID);
+        
+            // <span class="comment">Register individual blocks using RegistryObject</span>
+            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> RegistryObject&lt;Block&gt; XZIER_BLOCK = BLOCKS.register(<span class="string">"xzier_block"</span>,
+                () -> <span class="keyword">new</span> Block(Block.Properties.copy(Blocks.STONE)));
+          }
+        </code>
+      </pre>
+
+      <h3>Enchantment Registration</h3>
+      <pre>
+        <code>
+          <span class="keyword">public</span> <span class="keyword">class</span> EnchantmentInit {
+            // <span class="comment">Create a DeferredRegister for Enchantments</span>
+            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> DeferredRegister&lt;Enchantment&gt; ENCHANTMENTS = 
+                DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, TutorialMod.MODID);
+        
+            // <span class="comment">Register individual enchantments using RegistryObject</span>
+            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> RegistryObject&lt;Enchantment&gt; XZIER_ENCHANTMENT = ENCHANTMENTS.register(<span class="string">"xzier_enchantment"</span>,
+                () -> <span class="keyword">new</span> Enchantment(<span class="keyword">new</span> Enchantment.Rarity(<span class="number">Rarity.UNCOMMON</span>), 
+                    <span class="keyword">new</span> Enchantment.Type(<span class="string">"all"</span>)));
+          }
+        </code>
+      </pre>
+
+      <h2>Registration Logic and Considerations</h2>
+
+      <h3>Block Registration Logic</h3>
+      <ul>
+        <li>Blocks often need both a Block and BlockItem registration</li>
+        <li>Block properties define behavior (hardness, resistance, etc.)</li>
+        <li>Complex blocks may need associated BlockEntities</li>
+      </ul>
+
+      <h3>Item Registration Logic</h3>
+      <ul>
+        <li>Items can have special properties (stack size, durability)</li>
+        <li>Custom items extend base Item class or specialized classes (SwordItem, etc.)</li>
+        <li>Items may implement additional interfaces for special behavior</li>
+      </ul>
+
+      <h3>BlockEntity Registration</h3>
+      <pre>
+        <code>
+          <span class="keyword">public</span> <span class="keyword">class</span> TileEntityInit {
+            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> DeferredRegister&lt;BlockEntityType&lt;?&gt;&gt; TILE_ENTITIES = 
+                DeferredRegister.create(BLOCK_ENTITY_TYPES, TutorialMod.MODID);
+        
+            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> RegistryObject&lt;BlockEntityType&lt;ProcessorBlockEntity&gt;&gt; 
+                PROCESSOR_BLOCK_ENTITY = TILE_ENTITIES.register(<span class="string">"processor_block"</span>,
+                    () -> BlockEntityType.Builder.of(ProcessorBlockEntity::new, 
+                        PROCESSOR_BLOCK.get()).build(<span class="keyword">null</span>));
+          }
+        </code>
+      </pre>
+      <h3>Creative Tab Registration</h3>
+      <pre>
+        <code>
+          <span class="keyword">public</span> <span class="keyword">class</span> ModCreativeTabsInit {
+            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> DeferredRegister&lt;CreativeModeTab&gt; CREATIVE_MODE_TABS = 
+                DeferredRegister.create(Registries.CREATIVE_MODE_TAB, TutorialMod.MODID);
+        
+            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> RegistryObject&lt;CreativeModeTab&gt; TUTORIAL_TAB = 
+                CREATIVE_MODE_TABS.register(<span class="string">"tutorial_tab"</span>, 
+                    () -> CreativeModeTab.builder()
+                        .withTabsBefore(CreativeModeTabs.COMBAT)
+                        .icon(() -> XZIER_GEM.get().getDefaultInstance())
+                        .displayItems((parameters, output) -> {
+                            output.accept(XZIER_GEM.get());
+                            // <span class="comment">Add other items...</span>
+                        }).build());
+          }
+        </code>
+      </pre>
+    <h5>Organization</h5>
+
+      <ul>
+        <li>Mod initialization classes (e.g., `ModInit`, `ModCreativeTabsInit`)</li>
+        <li>Keep registrations organized by type
+        </li>
+        <li>Use helper methods for common registration patterns
+        </li>
+   
+        <li>Maintain consistent naming conventions
+        </li>
+      </ul>
+        <h5>Dependencies</h5>
+<ul>
+        <li>Consider registration order for interdependent content</li>
+
+        <li>Use suppliers (Supplier&lt;T&gt;) to handle circular dependencies</li>
+      </ul>
+        <h5>Resource Management</h5>
+        <ul>
+        <li>Ensure all registered content has corresponding resources (textures, models)</li>
+
+        <li>Follow Minecraft's naming conventions for resources</li>
+      </ul>
+        <h5>Performance</h5>
+<ul>
+        <li>Use lazy initialization where appropriate</li>
+        <li>Avoid heavy operations during registration</li>
+      </ul>
+
+      <p>This registration system ensures that all mod content is properly initialized and integrated into the game,
+        while maintaining compatibility with other mods and the base game. The structured approach makes the code
+        maintainable and easy to extend with new content.
+
+      </p>
+
+
+    </div>
+
+
+
+
+    <div class="d-flex justify-content-center align-items-center">
+      <a href="https://github.com/Rohan-Jose-08/testmod" class="me-2">
+        <button class="gradient-button">
+          <i class="bi bi-github me-2"></i>
+          <span class="d-none d-sm-inline">View on GitHub</span>
+          <span class="d-inline d-sm-none">GitHub</span>
+        </button>
+      </a>
+
+      <a href="tutorialmod-1.1.0.jar" class="download-button" id="downloadBtn" download="tutorialmod-1.1.0.jar">
+        <svg class="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download Mod
+    </a>
+    </div>
+ 
+  </main>
+
+
+
+
+
+
+
+  <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/download.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/header.js"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
