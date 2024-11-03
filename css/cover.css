@@ -23,12 +23,7 @@
 }
 
 
-.card {
-  transition: transform 0.3s ease-in-out;
-}
-.card:hover {
-  transform: translateY(-5px);
-}
+
 
 .cover-container {
   max-width: 42em;
@@ -74,3 +69,48 @@ main {
 h1 {
   color: var(--h1-color);
 }
+
+@keyframes scrollIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes popUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.scroll-in {
+  animation: scrollIn 1s ease-out forwards;
+  opacity: 0;
+}
+
+.pop-up {
+  animation: popUp 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.delay-2 {
+  animation-delay: 0.4s;
+}
+
+.delay-3 {
+  animation-delay: 0.6s;
+}
+

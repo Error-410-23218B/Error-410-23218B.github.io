@@ -69,29 +69,138 @@
                 <li>It determines <strong>if and where</strong> it hits a wall.</li>
                 <li>It calculates the <strong>distance</strong> from the player to the wall.</li>
             </ul>
+
+
+            <pre><code>function castRay(playerX, playerY, angle) {
+              let rayX = playerX;
+              let rayY = playerY;
+              let stepSize = 0.1; // Adjust for precision
+              let distance = 0;
+          
+              while (true) {
+                  rayX += Math.cos(angle) * stepSize;
+                  rayY += Math.sin(angle) * stepSize;
+                  distance += stepSize;
+          
+                  if (isWall(rayX, rayY)) {
+                      return distance; // Return distance when hitting a wall
+                  }
+              }
+          }
+          </code></pre>
+          
     
             <h3>3. Calculating Distance and Projecting Walls</h3>
             <p>Once a ray hits a wall, the engine calculates the <strong>distance</strong> from the player to the wall. Using trigonometric functions, the engine accounts for the player’s viewing angle to avoid distortion, often called <strong>fish-eye effect</strong>. With the distance in hand, the engine can calculate the height of the wall on the screen, projecting it onto a 2D plane. The further away the wall, the shorter it appears, simulating depth.</p>
     
+            <pre><code>function calculateDistance(playerX, playerY, wallX, wallY) {
+              return Math.sqrt(Math.pow(wallX - playerX, 2) + Math.pow(wallY - playerY, 2));
+          }
+          </code></pre>
+
+
+
             <h3>4. Drawing the Projection</h3>
             <p>The raycasting engine now has the necessary data to draw each wall section on the screen:</p>
+            
             <ul>
                 <li><strong>Wall height</strong> is scaled based on distance.</li>
                 <li><strong>Texture mapping</strong> applies any textures (like brick patterns) to the wall for added realism.</li>
                 <li><strong>Shading</strong> often varies with distance, dimming further objects to simulate atmospheric perspective.</li>
             </ul>
+
+            <pre><code>function drawWall(screenX, wallHeight, distance) {
+              let scaledHeight = (SCREEN_HEIGHT / distance) * WALL_HEIGHT_SCALE; // Adjust for screen height and scaling
+              context.fillRect(screenX, (SCREEN_HEIGHT / 2) - (scaledHeight / 2), 1, scaledHeight);
+          }
+          </code></pre>
+
             <p>Each ray represents a vertical slice of the wall, and these slices are drawn side-by-side to fill the entire screen width.</p>
     
             <h3>5. Handling Movement and Rotation</h3>
             <p>Raycasting engines are dynamic, and the player’s position or view angle can change. Movement involves updating the player’s location in the 2D grid, while <strong>rotation</strong> modifies the direction of rays within the FOV. With each movement or rotation, the engine re-casts rays from the updated perspective, providing an interactive, responsive environment.</p>
-    
+
+            <pre><code>function movePlayer(direction) {
+              if (direction === 'FORWARD') {
+                  playerX += Math.cos(playerAngle) * MOVE_SPEED;
+                  playerY += Math.sin(playerAngle) * MOVE_SPEED;
+              } else if ( direction === 'BACKWARD') {
+                  playerX -= Math.cos(playerAngle) * MOVE_SPEED;
+                  playerY -= Math.sin(playerAngle) * MOVE_SPEED;
+              }
+          }
+          
+          function rotatePlayer(angleChange) {
+              playerAngle += angleChange;
+          }
+          </code></pre>
+
+
+
+
             <h3>6. Optimization Techniques</h3>
             <p>Raycasting engines employ a few common optimizations to improve performance:</p>
             <ul>
                 <li><strong>Reducing Resolution:</strong> Lowering ray density can improve performance at the cost of some visual quality.</li>
+                <pre><code>function castRaysWithReducedResolution(playerX, playerY, angle, numRays) {
+                  let rays = [];
+                  let angleStep = FOV / numRays; // Divide the field of view by the number of rays
+              
+                  for (let i = 0; i &lt; numRays; i++) {
+                      let rayAngle = angle - (FOV / 2) + (i * angleStep);
+                      let distance = castRay(playerX, playerY, rayAngle);
+                      rays.push(distance);
+                  }
+              
+                  return rays;
+              }
+              </code></pre>
+
                 <li><strong>Column Skipping:</strong> For walls that share alignment (e.g., straight corridor walls), the engine can skip unnecessary columns to reduce computation.</li>
+                <pre><code>function drawWallsWithColumnSkipping(walls) {
+                  let lastWallX = null;
+              
+                  for (let wall of walls) {
+                      if (wall.x === lastWallX) {
+                          continue; // Skip this column if it's the same as the last one
+                      }
+                      drawWall(wall.screenX, wall.height, wall.distance);
+                      lastWallX = wall.x; // Update the last wall x-coordinate
+                  }
+              }
+              </code></pre>
                 <li><strong>Binary Space Partitioning (BSP):</strong> In more advanced implementations, the environment is pre-processed into smaller sections to avoid rendering unseen areas.</li>
-            </ul>
+                <pre><code>class BSPNode {
+                  constructor(bounds) {
+                      this.bounds = bounds; // The area this node covers
+                      this.left = null; // Left child
+                      this.right = null; // Right child
+                      this.walls = []; // Walls within this node
+                  }
+              
+                  addWall(wall) {
+                      // Logic to add the wall and split the node if needed
+                  }
+              
+                  render(playerPosition) {
+                      if (!this.isVisible(playerPosition)) return; // Only render if visible
+                      for (let wall of this.walls) {
+                          drawWall(wall.screenX, wall.height, wall.distance);
+                      }
+                      this.left.render(playerPosition); // Render left child
+                      this.right.render(playerPosition); // Render right child
+                  }
+              
+                  isVisible(playerPosition) {
+                      // Logic to determine if the node is visible from the player's position
+                  }
+              }
+              </code></pre>
+              </ul>
+
+
+
+
     
             <h2>Beyond Basics: Adding Floors, Ceilings, and Sprites</h2>
             <p>For true 3D immersion, raycasting engines often include <strong>floors and ceilings</strong>, which can be drawn similarly to walls but scaled differently. Some engines incorporate <strong>sprites</strong>—images like enemies or items that are rendered at specific points, simulating interaction within the 3D space. Sprites are typically rendered after walls to maintain the illusion of depth.</p>
@@ -132,10 +241,14 @@
 
   </main>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>  
   <script src="css/glow.css"></script>
   <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/footer.js"></script>
   <script src="js/index.js"></script>
   <script src="js/header.js"></script>
   <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>

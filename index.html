@@ -14,20 +14,21 @@
     <link href="css/header.css" rel="stylesheet">
     <link href="css/cover.css" rel="stylesheet">
     <link href="css/footer.css" rel="stylesheet">
+    <link rel="preload" href="cover.webp" as="image">
 
   </head>
-  <body class="d-flex flex-column h-100 text-center text-white  fade-in">
+  <body class="d-flex flex-column h-100 text-center text-white fade-in">
     <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <header class="mb-auto">
         <!-- Your existing header code here -->
       </header>
 
       <main class="px-3">
-        <h1 class="display-4 fw-bold mb-4 search-text">Welcome to My Portfolio</h1>
-        <p class="lead mb-5 search-text">I'm Rohan Jose, a passionate Computer Science enthusiast. Explore my projects and experience in the world of technology.</p>
+        <h1 class="display-4 fw-bold mb-4 search-text scroll-in">Welcome to My Portfolio</h1>
+        <p class="lead mb-5 search-text scroll-in delay-1">I'm Rohan Jose, a passionate Computer Science enthusiast. Explore my projects and experience in the world of technology.</p>
         <div class="row g-4 justify-content-center">
           <div class="col-md-4">
-            <div class="card ">
+            <div class="card pop-up delay-2">
               <div class="card-body">
                 <i class="bi bi-code-slash fs-1 mb-3"></i>
                 <h3 class="card-title search-text">Projects</h3>
@@ -37,21 +38,18 @@
             </div>
           </div>
  
-
           <div class="col-md-4">
-            <div class="card ">
+            <div class="card pop-up delay-3">
               <div class="card-body">
                 <i class="bi bi-envelope fs-1 mb-3"></i>
                 <h3 class="card-title search-text">Contact</h3>
-                <p class="card-text">Get in touch with me for collaborations, opportunities, or just to say hello!</p>
+                <p class="card-text search-text">Get in touch with me for collaborations, opportunities, or just to say hello!</p>
                 <button class="btn btn-outline-light bg-dark" data-bs-toggle="modal" data-bs-target="#contactModal">Contact Me</button>
               </div>
             </div>
           </div>
         </div>
       </main>
-
-
     </div>
 
     <!-- Contact Form Modal -->

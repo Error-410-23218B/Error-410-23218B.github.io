@@ -59,6 +59,36 @@
         <li class="search-text">linker.ld to link it all together</li>
       </ul>
 
+      <h3>Example of boot.s</h3>
+      <pre><code>
+section .text
+    global _start
+_start:
+    ; Initialize the stack pointer
+    cli
+    mov ax, 0x7C00
+    mov esp, ax
+    ; Call the kernel
+    call kernel_main
+    ; Infinite loop
+.loop:
+    jmp .loop
+      </code></pre>
+
+      <h3>Example of linker.ld</h3>
+      <pre><code>
+OUTPUT_FORMAT("elf32-i386")
+ENTRY(_start)
+
+SECTIONS
+{
+  . = 0x100000;
+  .text : { *(.text) }
+  .data : { *(.data) }
+  .bss  : { *(.bss)  }
+}
+      </code></pre>
+
       <h2 class="search-text">GNU Grub</h2>
 
       <p class="search-text">GRUB will search for a specific Multiboot header in boot.s to load the OS, ensuring that everything is set up
@@ -74,6 +104,18 @@
         changes live, no constant rebooting required. With these basics in place, you’re ready to get your "Hello World"
         OS running!
       </p>
+
+      <pre><code>
+        set default=0
+        set timeout=5
+        
+        menuentry "OSDev Project" {
+          insmod part_msdos
+          insmod ext2
+          set root='(hd0,msdos1)'
+          multiboot /boot/kernel.bin
+        }
+              </code></pre>
 
       <h2 class="search-text">Sysroot</h2>
 
@@ -132,6 +174,81 @@
         interrupt. In x86 systems, this table can contain up to 256 entries, with the first 32 vectors often reserved
         for exceptions. The IDT allows the CPU to seamlessly jump to the correct ISR to handle each interrupt type.</p>
 
+<pre><code>
+  #include &lt;stdio.h&gt;
+    #include &lt;kernel/interrupt.h&gt;
+    #include "io.c"
+    
+    #include &lt;stdint.h&gt;
+    #include &lt;stddef.h&gt;
+    #include &lt;stdbool.h&gt;
+    
+    #define IDT_MAX_DESCRIPTORS  256
+    
+    extern void* isr_stub_table[];
+    
+    
+    static bool vectors[IDT_MAX_DESCRIPTORS];
+    
+    
+    typedef struct {
+      uint16_t    isr_low;      // The lower 16 bits of the ISR's address
+      uint16_t    kernel_cs;    // The GDT segment selector that the CPU will load into CS before calling the ISR
+      uint8_t     reserved;     // Set to zero
+      uint8_t     attributes;   // Type and attributes; see the IDT page
+      uint16_t    isr_high;     // The higher 16 bits of the ISR's address
+    } __attribute__((packed)) idt_entry_t;
+    
+    typedef struct {
+      uint16_t	limit;
+      uint32_t	base;
+    } __attribute__((packed)) idtr_t;
+    
+    static idtr_t idtr;
+    
+    __attribute__((aligned(0x10))) 
+    static idt_entry_t idt[256]; // Create an array of IDT entries; aligned for performance
+    
+    void idt_set_descriptor(uint8_t vector, void* isr, uint8_t flags);
+    void idt_set_descriptor(uint8_t vector, void* isr, uint8_t flags) {
+        idt_entry_t* descriptor = &idt[vector];
+    
+        descriptor->isr_low        = (uint32_t)isr & 0xFFFF;
+        descriptor->kernel_cs      = 0x08; // this value can be whatever offset your kernel code selector is in your GDT
+        descriptor->attributes     = flags;
+        descriptor->isr_high       = (uint32_t)isr >> 16;
+        descriptor->reserved       = 0;
+    }
+    
+    
+    
+    
+    void idt_init() {
+    
+        idtr.base = (uintptr_t)&idt[0];
+        idtr.limit = (uint16_t)sizeof(idt_entry_t) * IDT_MAX_DESCRIPTORS - 1;
+    
+        for (uint8_t vector = 0; vector &gt; 32; vector++) {
+            idt_set_descriptor(vector, isr_stub_table[vector], 0x8E);
+            vectors[vector] = true;
+        }
+    
+        __asm__ volatile ("lidt %0" : : "m"(idtr)); // load the new IDT
+        __asm__ volatile ("sti"); // set the interrupt flag
+    
+        // Wait for the keyboard controller to be ready
+      
+    
+        outb(0x08,0xF4);
+        printf((char*)inb(0x08));
+    }
+
+</code></pre>
+
+
+
+
+
       <h2 class="search-text">
         How the Programmable Interrupt Controller (PIC) Works
 
@@ -160,6 +277,62 @@
         clearing this flag (using the cli instruction), the CPU will ignore interrupts, allowing critical operations to
         proceed uninterrupted. When ready, the IF can be set again using sti, re-enabling the response to incoming
         interrupts.</p>
+
+<pre><code>
+  %macro isr_err_stub 1
+isr_stub_%+%1:
+    call exception_handler
+    iret 
+%endmacro
+; if writing for 64-bit, use iretq instead
+%macro isr_no_err_stub 1
+isr_stub_%+%1:
+    call exception_handler
+    iret
+%endmacro
+
+extern exception_handler
+isr_no_err_stub 0
+isr_no_err_stub 1
+isr_no_err_stub 2
+isr_no_err_stub 3
+isr_no_err_stub 4
+isr_no_err_stub 5
+isr_no_err_stub 6
+isr_no_err_stub 7
+isr_err_stub    8
+isr_no_err_stub 9
+isr_err_stub    10
+isr_err_stub    11
+isr_err_stub    12
+isr_err_stub    13
+isr_err_stub    14
+isr_no_err_stub 15
+isr_no_err_stub 16
+isr_err_stub    17
+isr_no_err_stub 18
+isr_no_err_stub 19
+isr_no_err_stub 20
+isr_no_err_stub 21
+isr_no_err_stub 22
+isr_no_err_stub 23
+isr_no_err_stub 24
+isr_no_err_stub 25
+isr_no_err_stub 26
+isr_no_err_stub 27
+isr_no_err_stub 28
+isr_no_err_stub 29
+isr_err_stub    30
+isr_no_err_stub 31
+
+global isr_stub_table
+isr_stub_table:
+%assign i 0 
+%rep    32 
+    dd isr_stub_%+i ; use DQ instead if targeting 64-bit
+%assign i i+1 
+%endrep
+</code></pre>
 
       <h2 class="search-text">Global Descriptor Table</h2>
 
@@ -208,6 +381,32 @@
 
       </ul>
 
+<pre><code>
+  void encodeGdtEntry(uint8_t *target, struct GDT source)
+{
+    // Check the limit to make sure that it can be encoded
+    if (source.limit > 0xFFFFF) {kerror("GDT cannot encode limits larger than 0xFFFFF");}
+    
+    // Encode the limit
+    target[0] = source.limit & 0xFF;
+    target[1] = (source.limit >> 8) & 0xFF;
+    target[6] = (source.limit >> 16) & 0x0F;
+    
+    // Encode the base
+    target[2] = source.base & 0xFF;
+    target[3] = (source.base >> 8) & 0xFF;
+    target[4] = (source.base >> 16) & 0xFF;
+    target[7] = (source.base >> 24) & 0xFF;
+    
+    // Encode the access byte
+    target[5] = source.access_byte;
+    
+    // Encode the flags
+    target[6] |= (source.flags &lt;&lt; 4);
+}
+</code></pre>
+
+
 <h2 class="search-text">How the CPU Uses the GDT</h2>
 
 <ul style="text-align: left; list-style-type: disc;">
@@ -252,10 +451,20 @@
     </div>
   </main>
  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.css">
   <script src="css/glow.css"></script>
   <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>  
+
+
   <script src="js/footer.js"></script>
   <script src="js/index.js"></script>
   <script src="js/header.js"></script>
   <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/x86asm.min.js"></script>
+
+  <script>hljs.highlightAll();</script>
+
 </body>

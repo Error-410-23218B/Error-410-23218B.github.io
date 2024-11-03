@@ -123,52 +123,50 @@ const headerText = `
 
       document.addEventListener('DOMContentLoaded', () => {
         const searchInput = document.getElementById('search-input');
-        const contentToSearch = document.querySelectorAll('.search-text'); // Adjust the selector based on your content
+        const contentToSearch = document.querySelectorAll('.search-text');
     
-        // Store original HTML content to reset when necessary
+        // Store original HTML content to preserve syntax highlighting
         const originalContent = Array.from(contentToSearch).map(container => container.innerHTML);
     
         const clearHighlights = () => {
             contentToSearch.forEach((container, index) => {
-                // Reset to original content
                 container.innerHTML = originalContent[index];
             });
         };
     
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
+        const highlightMatches = (element, searchTerm) => {
+            const html = element.innerHTML;
+            const searchRegex = new RegExp(searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+            
+            element.innerHTML = html.replace(searchRegex, match => 
+                `<mark class="search-highlight">${match}</mark>`
+            );
+        };
     
-            // Clear highlights if the search box is empty
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.trim();
+    
             if (!searchTerm) {
                 clearHighlights();
-                return; // Exit the function if the input is empty
+                return;
             }
     
-            // Clear previous highlights
-            clearHighlights();
-    
             contentToSearch.forEach((container, index) => {
-                // Create a temporary element to extract text
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = originalContent[index]; // Set the original HTML content
-    
-                // Get the plain text content
-                const textContent = tempDiv.textContent || tempDiv.innerText || "";
-    
-                // Create a regex for the search term
-                const regex = new RegExp(`(${searchTerm})`, 'gi');
-    
-                // Highlight matches in the original HTML
-                container.innerHTML = originalContent[index].replace(regex, '<mark>$1</mark>');
+                // Reset to original content first
+                container.innerHTML = originalContent[index];
+                // Then apply new highlights
+                highlightMatches(container, searchTerm);
             });
         });
     
-        // Clear highlights when the search box loses focus
+        // Optional: Clear highlights when the search box loses focus
         searchInput.addEventListener('blur', function() {
-            clearHighlights();
+            if (!this.value.trim()) {
+                clearHighlights();
+            }
         });
     });
-
+    
     const divElement = document.getElementById('search-container');
 
 // Get all child elements of the div element
@@ -176,5 +174,7 @@ const childElements = divElement.children;
 
 // Loop through each child element and add the 'search-text' class
 for (let i = 0; i < childElements.length; i++) {
-    childElements[i].classList.add('search-text');
+      childElements[i].classList.add('search-text');
+
+    
 }
