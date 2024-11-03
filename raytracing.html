@@ -79,17 +79,16 @@
         <li class="search-text">Kernel Launch: The rendering kernel (render) is launched on blocks of threads (e.g., 8x8 blocks) to
           parallelize the work of coloring each pixel.</li>
 
-          <pre>
-            <code> 
-            // Example of kernel launch
-            int nx = 1024;
-            int ny = 768;
-            int num_threads = 8;
-            dim3 block(num_threads, num_threads);
-            dim3 grid((nx + block.x - 1) / block.x, (ny + block.y - 1) / block.y);
-            render &lt;&lt;&lt;grid, block&gt;&gt;&gt;(d_ptr, nx, ny);
-            </code>
-          </pre>
+         
+<pre><code>// Example of kernel launch
+int nx = 1024;
+int ny = 768;
+int num_threads = 8;
+
+dim3 block(num_threads, num_threads);
+dim3 grid((nx + block.x - 1) / block.x, (ny + block.y - 1) / block.y);
+
+render &lt;&lt;&lt;grid, block&gt;&gt;&gt;(d_ptr, nx, ny);</code></pre>
     
 
       </ul>
@@ -178,7 +177,7 @@
 
 
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>  
   <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/footer.js"></script>

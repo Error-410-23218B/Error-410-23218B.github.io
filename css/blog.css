@@ -44,10 +44,13 @@ ul{
   list-style-type: disc;
 }
 
+
+
+
 pre {
-  background-color: #1e1e1e;
+  background-color: #0d1117;
   border: 1px solid #333;
-  border-left: 3px solid #2400f3;
+  border-left: 3px solid #2600fc;
   color: #d4d4d4;
   page-break-inside: avoid;
   font-family: 'Consolas', 'Courier New', monospace;
@@ -61,7 +64,13 @@ pre {
   word-wrap: break-word;
   position: relative;
   box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  box-shadow: 10px 10px #0d111788;
+  transition: transform 0.3s ease;
 }
+
+
 
 pre::before {
   content: attr(data-language);
@@ -74,6 +83,12 @@ pre::before {
   font-size: 0.75em;
   font-weight: bold;
   text-transform: uppercase;
+}
+
+
+pre:hover {
+  transform: scale(1.02); /* Scale up slightly on hover */
+
 }
 
 code {
