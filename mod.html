@@ -52,14 +52,14 @@
       <h2>Basic Registration Structure</h2>
       <pre>
         <code>
-          <span class="keyword">public</span> <span class="keyword">class</span> ItemInit {
-            // <span class="comment">Create a DeferredRegister for Items</span>
-            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> DeferredRegister&lt;Item&gt; ITEMS = 
+      public class ItemInit {
+            // Create a DeferredRegister for Items
+            public static final DeferredRegister&lt;Item&gt; ITEMS = 
                 DeferredRegister.create(ForgeRegistries.ITEMS, TutorialMod.MODID);
         
-            // <span class="comment">Register individual items using RegistryObject</span>
-            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> RegistryObject&lt;Item&gt; XZIER_GEM = ITEMS.register(<span class="string">"xzier_gem"</span>,
-                () -> <span class="keyword">new</span> Item(<span class="keyword">new</span> Item.Properties().stacksTo(<span class="number">128</span>)));
+            // Register individual items using RegistryObject
+            public static final RegistryObject&lt;Item&gt; XZIER_GEM = ITEMS.register("xzier_gem",
+                () -> new Item(new Item.Properties().stacksTo(128)));
           }
         </code>
       </pre>
@@ -75,13 +75,13 @@
         <li><strong>Event Bus Registration</strong>
           <pre>
             <code>
-              <span class="keyword">public</span> <span class="keyword">class</span> TutorialMod {
-                <span class="keyword">public</span> <span class="function">TutorialMod() </span> {
+              public class TutorialMod {
+                public TutorialMod()  {
                     IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
                     ItemInit.ITEMS.register(bus);
                     BlockInit.BLOCKS.register(bus);
                     EnchantmentInit.ENCHANTMENTS.register(bus);
-                    // <span class="comment">... other registrations</span>
+                    // ... other registrations
                 }
               }
             </code>
@@ -94,14 +94,14 @@
       <h3>Block Registration</h3>
       <pre>
         <code>
-          <span class="keyword">public</span> <span class="keyword">class</span> BlockInit {
-            // <span class="comment">Create a DeferredRegister for Blocks</span>
-            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> DeferredRegister&lt;Block&gt; BLOCKS = 
+          public class BlockInit {
+            // Create a DeferredRegister for Blocks
+            public static final DeferredRegister&lt;Block&gt; BLOCKS = 
                 DeferredRegister.create(ForgeRegistries.BLOCKS, TutorialMod.MODID);
         
-            // <span class="comment">Register individual blocks using RegistryObject</span>
-            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> RegistryObject&lt;Block&gt; XZIER_BLOCK = BLOCKS.register(<span class="string">"xzier_block"</span>,
-                () -> <span class="keyword">new</span> Block(Block.Properties.copy(Blocks.STONE)));
+            // Register individual blocks using RegistryObject
+            public static final RegistryObject&lt;Block&gt; XZIER_BLOCK = BLOCKS.register("xzier_block",
+                () -> new Block(Block.Properties.copy(Blocks.STONE)));
           }
         </code>
       </pre>
@@ -109,15 +109,15 @@
       <h3>Enchantment Registration</h3>
       <pre>
         <code>
-          <span class="keyword">public</span> <span class="keyword">class</span> EnchantmentInit {
-            // <span class="comment">Create a DeferredRegister for Enchantments</span>
-            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> DeferredRegister&lt;Enchantment&gt; ENCHANTMENTS = 
+          public class EnchantmentInit {
+            // Create a DeferredRegister for Enchantments
+            public static final DeferredRegister&lt;Enchantment&gt; ENCHANTMENTS = 
                 DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, TutorialMod.MODID);
         
-            // <span class="comment">Register individual enchantments using RegistryObject</span>
-            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> RegistryObject&lt;Enchantment&gt; XZIER_ENCHANTMENT = ENCHANTMENTS.register(<span class="string">"xzier_enchantment"</span>,
-                () -> <span class="keyword">new</span> Enchantment(<span class="keyword">new</span> Enchantment.Rarity(<span class="number">Rarity.UNCOMMON</span>), 
-                    <span class="keyword">new</span> Enchantment.Type(<span class="string">"all"</span>)));
+            //Register individual enchantments using RegistryObject
+          public static final RegistryObject&lt;Enchantment&gt; XZIER_ENCHANTMENT = ENCHANTMENTS.register("xzier_enchantment",
+                () -> new Enchantment(new Enchantment.Rarity(Rarity.UNCOMMON), 
+                    new Enchantment.Type("all")));
           }
         </code>
       </pre>
@@ -141,32 +141,32 @@
       <h3>BlockEntity Registration</h3>
       <pre>
         <code>
-          <span class="keyword">public</span> <span class="keyword">class</span> TileEntityInit {
-            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> DeferredRegister&lt;BlockEntityType&lt;?&gt;&gt; TILE_ENTITIES = 
+         public class TileEntityInit {
+           public static final DeferredRegister&lt;BlockEntityType&lt;?&gt;&gt; TILE_ENTITIES = 
                 DeferredRegister.create(BLOCK_ENTITY_TYPES, TutorialMod.MODID);
         
-            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> RegistryObject&lt;BlockEntityType&lt;ProcessorBlockEntity&gt;&gt; 
-                PROCESSOR_BLOCK_ENTITY = TILE_ENTITIES.register(<span class="string">"processor_block"</span>,
+            public static final RegistryObject&lt;BlockEntityType&lt;ProcessorBlockEntity&gt;&gt; 
+                PROCESSOR_BLOCK_ENTITY = TILE_ENTITIES.register("processor_block",
                     () -> BlockEntityType.Builder.of(ProcessorBlockEntity::new, 
-                        PROCESSOR_BLOCK.get()).build(<span class="keyword">null</span>));
+                        PROCESSOR_BLOCK.get()).build(null));
           }
         </code>
       </pre>
       <h3>Creative Tab Registration</h3>
       <pre>
         <code>
-          <span class="keyword">public</span> <span class="keyword">class</span> ModCreativeTabsInit {
-            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> DeferredRegister&lt;CreativeModeTab&gt; CREATIVE_MODE_TABS = 
+          public ModCreativeTabsInit {
+            public static final DeferredRegister&lt;CreativeModeTab&gt; CREATIVE_MODE_TABS = 
                 DeferredRegister.create(Registries.CREATIVE_MODE_TAB, TutorialMod.MODID);
         
-            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> RegistryObject&lt;CreativeModeTab&gt; TUTORIAL_TAB = 
-                CREATIVE_MODE_TABS.register(<span class="string">"tutorial_tab"</span>, 
+            public static final RegistryObject&lt;CreativeModeTab&gt; TUTORIAL_TAB = 
+                CREATIVE_MODE_TABS.register("tutorial_tab", 
                     () -> CreativeModeTab.builder()
                         .withTabsBefore(CreativeModeTabs.COMBAT)
                         .icon(() -> XZIER_GEM.get().getDefaultInstance())
                         .displayItems((parameters, output) -> {
                             output.accept(XZIER_GEM.get());
-                            // <span class="comment">Add other items...</span>
+                            // Add other items...
                         }).build());
           }
         </code>
@@ -187,7 +187,7 @@
 <ul>
         <li>Consider registration order for interdependent content</li>
 
-        <li>Use suppliers (Supplier&lt;T&gt;) to handle circular dependencies</li>
+        <li>Use suppliers <code>(Supplier&lt;T&gt;)</code> to handle circular dependencies</li>
       </ul>
         <h5>Resource Management</h5>
         <ul>
@@ -217,8 +217,8 @@
       <a href="https://github.com/Rohan-Jose-08/testmod" class="me-2">
         <button class="gradient-button">
           <i class="bi bi-github me-2"></i>
-          <span class="d-none d-sm-inline">View on GitHub</span>
-          <span class="d-inline d-sm-none">GitHub</span>
+          <span class="d-none d-sm-inline">View on GitHub
+          <span class="d-inline d-sm-none">GitHub
         </button>
       </a>
 
@@ -239,11 +239,15 @@
 
 
 
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>  
   <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/download.js"></script>
   <script src="js/footer.js"></script>
   <script src="js/index.js"></script>
   <script src="js/header.js"></script>
   <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
 </body>
