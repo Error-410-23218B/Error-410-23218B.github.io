@@ -1,5 +1,16 @@
 function createFooter(){
     const footerHtml = `
+
+      <style>
+      .icon-glow {
+        transition: filter 0.3s ease;
+      }
+
+      .icon-glow:hover {
+        filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #ffffff);
+      }
+    </style>
+
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
@@ -40,9 +51,8 @@ function createFooter(){
               <span class="mb-3 mb-md-0 text-white-50">&copy; 2024 Rohan Jose</span>
             </div>
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-              <li class="ms-3"><a class="text-white-50" href="cube.html"><i class="bi bi-boxes"></i></a></li>
-              <li class="ms-3"><a class="text-white-50" href="cube.html"><i class="bi bi-boxes"></i></a></li>
-              <li class="ms-3"><a class="text-white-50" href="https://github.com/Rohan-Jose-08"><i class="bi bi-github"></i></a></li>
+              <li class="ms-3"><a class="text-white-50 icon-glow" href="cube.html"><i class="bi bi-boxes h3"></i></a></li>
+              <li class="ms-3"><a class="text-white-50 icon-glow" href="https://github.com/Rohan-Jose-08"><i class="bi bi-github h3"></i></a></li>
             </ul>
           </div>
         </div>
